@@ -1,0 +1,25 @@
+# ==============================================
+# Thank you for using Spleef by waterman1001
+# For any support:
+# - Discord: Waterman1001#9500
+# - IGN: waterman1001
+# ==============================================
+
+# The maximum amount of players in a single game & minimum amount of players in order for a game to start
+MaxPlayersInGame: 12
+MinimumPlayersInGame: 2
+
+# The maximum distance (in blocks) players can get away from the spawn location of a spleef map
+MaxDistanceFromMap: 60
+
+# How long will the countdown last when there are enough players (Seconds)
+CountdownTime: 20
+
+# How long will a game last before force-ending (Seconds)
+GameTime: 360
+
+# How long will the winning last right after winner is announced (before teleporting all players to spawn) (Seconds)
+WinTime: 10
+
+# The item players will get when spleef starts!
+SpleefItem: "DIAMOND_SHOVEL"

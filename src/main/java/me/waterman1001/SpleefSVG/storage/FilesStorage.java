@@ -1,0 +1,119 @@
+package me.waterman1001.SpleefSVG.storage;
+
+import com.sk89q.worldedit.math.BlockVector3;
+import me.waterman1001.SpleefSVG.Main;
+import me.waterman1001.SpleefSVG.modules.GameMap;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.configuration.file.YamlConfiguration;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
+
+public class FilesStorage implements Storage {
+
+	private File file;
+	private YamlConfiguration config;
+
+	public FilesStorage() {
+		this.file = new File(Main.getInstance().getDataFolder(), "maps.yml");
+		
+		if(!this.file.exists()) {
+			try { file.createNewFile(); } catch (IOException e) { e.printStackTrace(); }
+		}
+		
+		this.config = YamlConfiguration.loadConfiguration(this.file);
+	}
+
+	@Override
+	public List<GameMap> getMaps() {
+		List<GameMap> list = new LinkedList<GameMap>();
+		
+		int failed = 0;
+		
+		for(String s : this.config.getConfigurationSection("").getKeys(false)) {
+			try {
+				World schematicWorld = Bukkit.getWorld(this.config.getString(s + ".world"));
+				
+				Location spawn = new Location(
+						Bukkit.getWorld(this.config.getString(s + ".spawn.world")),
+						this.config.getDouble(s + ".spawn.x"),
+						this.config.getDouble(s + ".spawn.y"),
+						this.config.getDouble(s + ".spawn.z"));
+
+				double minY = this.config.getDouble(s + ".minY");
+
+				String[] minpoint = this.config.getString(s + ".minpoint").split(",");
+				String[] maxpoint = this.config.getString(s + ".minpoint").split(",");
+				BlockVector3 min = BlockVector3.at(Integer.parseInt(minpoint[0]), Integer.parseInt(minpoint[1]), Integer.parseInt(minpoint[2]));
+				BlockVector3 max = BlockVector3.at(Integer.parseInt(maxpoint[0]), Integer.parseInt(maxpoint[1]), Integer.parseInt(maxpoint[2]));
+
+				list.add(new GameMap(s, schematicWorld, min, max, spawn, minY));
+				Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Loaded map " + s);
+			} catch(Exception e) {
+				failed++;
+				Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Failed to load " + failed + " maps!");
+			}
+		}
+		return list;
+	}
+	
+	public boolean saveMap(GameMap map) {
+		this.config.set(map.getName().toLowerCase() + ".world", map.getSchematicWorld().getName());
+		this.config.set(map.getName().toLowerCase() + ".spawn.world", map.getSpawn().getWorld().getName());
+		this.config.set(map.getName().toLowerCase() + ".spawn.x", map.getSpawn().getX());
+		this.config.set(map.getName().toLowerCase() + ".spawn.y", map.getSpawn().getY());
+		this.config.set(map.getName().toLowerCase() + ".spawn.z", map.getSpawn().getZ());
+		this.config.set(map.getName().toLowerCase() + ".minY", map.getminY());
+		this.config.set(map.getName().toLowerCase() + ".maxpoint", map.getMaxPoint().toParserString());
+		this.config.set(map.getName().toLowerCase() + ".minpoint", map.getMinPoint().toParserString());
+		
+		try {
+			this.config.save(this.file);
+			return true;
+		} catch (IOException e) {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean removeMap(String mapName) {
+		this.config.set(mapName.toLowerCase(), null);
+		try {
+			this.config.save(this.file);
+			return true;
+		} catch (IOException e) {
+			return false;
+		}
+	}
+
+	@Override
+	public GameMap getMap(String mapName) {
+		mapName = mapName.toLowerCase();
+		for(String s : this.config.getConfigurationSection("").getKeys(false)) {
+			if(!s.equalsIgnoreCase(mapName)) continue;
+
+			World schematicWorld = Bukkit.getWorld(this.config.getString(s + ".world"));
+				
+			Location spawn = new Location(
+					Bukkit.getWorld(this.config.getString(s + ".spawn.world")),
+					this.config.getDouble(s + ".spawn.x"),
+					this.config.getDouble(s + ".spawn.y"),
+					this.config.getDouble(s + ".spawn.z"));
+
+			double minY = this.config.getDouble(s + ".minY");
+
+			String[] minpoint = this.config.getString(s + ".minpoint").split(",");
+			String[] maxpoint = this.config.getString(s + ".minpoint").split(",");
+			BlockVector3 min = BlockVector3.at(Integer.parseInt(minpoint[0]), Integer.parseInt(minpoint[1]), Integer.parseInt(minpoint[2]));
+			BlockVector3 max = BlockVector3.at(Integer.parseInt(maxpoint[0]), Integer.parseInt(maxpoint[1]), Integer.parseInt(maxpoint[2]));
+
+			return new GameMap(s, schematicWorld, min, max, spawn, minY);
+		}
+		return null;
+	}
+}
