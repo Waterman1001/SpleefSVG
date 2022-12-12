@@ -9,10 +9,9 @@ import java.io.File;
 
 public class Messages {
 
-	public static String noPermissions = ChatColor.RED + "You don't have enough permissions!";
-	public static String mustBeAPlayer = ChatColor.RED + "You must be a player to do that!";
-
 	public static String prefix = "§8[§6SpleefSVG§8]§a ";
+	public static String noPermissions = prefix + ChatColor.RED + "You don't have enough permissions!";
+	public static String mustBeAPlayer = ChatColor.RED + "You must be a player to do that!";
 	
 	public static String couldntFindPlayer(String name) {
 		return ChatColor.RED + "Couldn't find player " + name;
