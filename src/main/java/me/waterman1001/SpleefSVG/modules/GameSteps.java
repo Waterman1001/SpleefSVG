@@ -215,7 +215,7 @@ public class GameSteps {
 	}
 
 	public void stopCountdown() {
-		if(this.game.startedCountdown()) {
+		if(this.game.startedCountdown() && GameManager.getInstance().getThreads().get(this.game) != null) {
 			GameManager.getInstance().getThreads().get(this.game).cancel();
 			GameManager.getInstance().getThreads().remove(this.game);
 		}
