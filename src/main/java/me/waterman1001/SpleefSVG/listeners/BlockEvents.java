@@ -10,45 +10,47 @@ import org.bukkit.Tag;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 
 public class BlockEvents implements Listener {
 	
 	@EventHandler
-	public void onBreak(BlockBreakEvent e) {
+	public void onStartBreaking(PlayerInteractEvent e) {
 		Player p = e.getPlayer();
+
+		if (e.getAction() != Action.LEFT_CLICK_BLOCK) return;
+
 		Game game = GameManager.getInstance().getPlayerGame(p);
-		
-		if(game == null) {
+
+		if (game == null) {
 			game = GameManager.getInstance().getPlayerGameSpectator(p);
-			
-			if(game == null) return;
+
+			if (game == null) return;
 		}
-		
-		if(p.getInventory().getItemInMainHand().getType() != Material.valueOf(Main.getInstance().getConfig().getString("SpleefItem"))
+
+		if (p.getInventory().getItemInMainHand().getType() != Material.valueOf(Main.getInstance().getConfig().getString("SpleefItem"))
 				&& p.getInventory().getItemInOffHand().getType() != Material.valueOf(Main.getInstance().getConfig().getString("SpleefItem"))) {
 			e.setCancelled(true);
 			return;
 		}
-		
-		if(!game.startedGame()) {
+
+		if (!game.startedGame()) {
 			e.setCancelled(true);
 			return;
 		}
-		
-		PlayerSpleefBlockEvent event = new PlayerSpleefBlockEvent(p, game, e.getBlock());
-        Bukkit.getPluginManager().callEvent(event);
 
-		if(!event.isCancelled()) {
-			if(e.getBlock().getType() == Material.SNOW_BLOCK || e.getBlock().getType() == Material.SNOW
-				|| e.getBlock().getType() == Material.PACKED_ICE || Tag.WOOL.isTagged(e.getBlock().getType())) {
-				e.getBlock().getDrops().clear();
+		PlayerSpleefBlockEvent event = new PlayerSpleefBlockEvent(p, game, e.getClickedBlock());
+		Bukkit.getPluginManager().callEvent(event);
+
+		if (!event.isCancelled()) {
+			if (e.getClickedBlock().getType() == Material.SNOW_BLOCK || e.getClickedBlock().getType() == Material.SNOW
+					|| e.getClickedBlock().getType() == Material.PACKED_ICE || Tag.WOOL.isTagged(e.getClickedBlock().getType())) {
+				e.getClickedBlock().getDrops().clear();
 				event.getBlock().getDrops().clear();
-				e.getBlock().setType(Material.AIR);
-				e.setCancelled(true);
+				e.getClickedBlock().setType(Material.AIR);
 			}
-		} else {
 			e.setCancelled(true);
 		}
 	}
