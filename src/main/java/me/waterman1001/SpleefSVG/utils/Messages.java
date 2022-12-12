@@ -11,6 +11,8 @@ public class Messages {
 
 	public static String noPermissions = ChatColor.RED + "You don't have enough permissions!";
 	public static String mustBeAPlayer = ChatColor.RED + "You must be a player to do that!";
+
+	public static String prefix = "§8[§6SpleefSVG§8]§a ";
 	
 	public static String couldntFindPlayer(String name) {
 		return ChatColor.RED + "Couldn't find player " + name;
@@ -174,7 +176,7 @@ public class Messages {
 		if(playerAmount != -1) message = message.replaceAll("%amount%", playerAmount + "").replaceAll("%left%", playerAmount + "");
 		if(max != -1) message = message.replaceAll("%max%", max + "");
 		if(seconds != -1) message = message.replaceAll("%seconds%", seconds + "");
-		return message;
+		return prefix + message;
 	}
 }
 
