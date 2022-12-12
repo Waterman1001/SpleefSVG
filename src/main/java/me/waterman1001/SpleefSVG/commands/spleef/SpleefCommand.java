@@ -113,5 +113,7 @@ public class SpleefCommand implements CommandExecutor {
 		if(p.hasPermission("spleef.command.map.remove")) p.sendMessage(ChatColor.AQUA + "/spleef map remove");
 		if(p.hasPermission("spleef.command.map.setminy")) p.sendMessage(ChatColor.AQUA + "/spleef map setminy");
 		if(p.hasPermission("spleef.command.map.setspawn")) p.sendMessage(ChatColor.AQUA + "/spleef map setspawn");
+		if(p.hasPermission("spleef.command.map.setspawn")) p.sendMessage(ChatColor.AQUA + "/spleef map setloseloc");
+		if(p.hasPermission("spleef.command.map.setspawn")) p.sendMessage(ChatColor.AQUA + "/spleef map setwinloc");
 	}
 }

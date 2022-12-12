@@ -300,7 +300,7 @@ public class GameManager {
 		BlockVector3 max = region.getMaximumPoint();
 
 		double minY = p.getLocation().getY();
-		GameMap map = new GameMap(mapName, p.getWorld(), min, max, p.getLocation(), minY);
+		GameMap map = new GameMap(mapName, p.getWorld(), min, max, p.getLocation(), minY, p.getLocation(), p.getLocation());
 		maps.add(map);
 		Game game = new Game(map);
 		this.games.add(game);

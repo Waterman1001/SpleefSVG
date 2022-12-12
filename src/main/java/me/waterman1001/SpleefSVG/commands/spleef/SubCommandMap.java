@@ -123,7 +123,7 @@ public class SubCommandMap extends BukkitSubCommand {
 
 	@Override
 	public String getInfo() {
-		return ChatColor.RED + "Usage: /spleef map <list/create/remove/setminy/setspawn> <mapname>";
+		return ChatColor.RED + "Usage: /spleef map <list/create/remove/setminy/setspawn/setloseloc/setwinloc> <mapname>";
 	}
 
 	@Override

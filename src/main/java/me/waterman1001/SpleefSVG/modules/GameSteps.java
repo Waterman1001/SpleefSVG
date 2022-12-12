@@ -123,6 +123,8 @@ public class GameSteps {
 				} else if(reason == LoseReason.FALL) {
 					SpleefPlayerUtils.clearInventory(p);
 					SpleefPlayerUtils.teleport(p, game.getMap().getLoseLoc());
+					// addSpectator(p); // In case we want players to be added as spectator.
+					// However, for Svesti this is not needed at the moment.
 				} else if(reason == LoseReason.WIN) {
 					SpleefPlayerUtils.clearInventory(p);
 					SpleefPlayerUtils.teleport(p, game.getMap().getWinLoc());
@@ -242,10 +244,9 @@ public class GameSteps {
 	public void finishGame() {
 		if(GameManager.getInstance().getThreads().containsKey(this.game) && GameManager.getInstance().getThreads().get(this.game) != null)
 			GameManager.getInstance().getThreads().get(this.game).cancel();
-    	
+
 		for(Player pl : this.game.getPlayers()) {
 			if(pl != null) {
-				SpleefPlayerUtils.teleport(pl, this.game.getMap().getLoseLoc());
 				SpleefPlayerUtils.clearInventory(pl);
 				//addSpectator(pl); // In case we want players to be added as spectator.
 				// However, for Svesti this is not needed at the moment.
@@ -253,12 +254,16 @@ public class GameSteps {
 		}
 		
 		this.game.setPlayers(new Player[1]);
+		endGame();
+
+		/*
 		Bukkit.getScheduler().runTaskLater(Main.getInstance(), new Runnable() {
 			@Override
 			public void run() {
 				endGame();
 			}
 		}, Main.getVars().getWinTime()*20);
+		*/
 	}
 
 	public void endGame() {

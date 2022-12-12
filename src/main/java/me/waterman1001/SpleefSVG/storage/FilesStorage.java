@@ -47,12 +47,24 @@ public class FilesStorage implements Storage {
 
 				double minY = this.config.getDouble(s + ".minY");
 
+				Location loseloc = new Location(
+						Bukkit.getWorld(this.config.getString(s + ".spawn.world")),
+						this.config.getDouble(s + ".loseloc.x"),
+						this.config.getDouble(s + ".loseloc.y"),
+						this.config.getDouble(s + ".loseloc.z"));
+
+				Location winloc = new Location(
+						Bukkit.getWorld(this.config.getString(s + ".spawn.world")),
+						this.config.getDouble(s + ".winloc.x"),
+						this.config.getDouble(s + ".winloc.y"),
+						this.config.getDouble(s + ".winloc.z"));
+
 				String[] minpoint = this.config.getString(s + ".minpoint").split(",");
 				String[] maxpoint = this.config.getString(s + ".minpoint").split(",");
 				BlockVector3 min = BlockVector3.at(Integer.parseInt(minpoint[0]), Integer.parseInt(minpoint[1]), Integer.parseInt(minpoint[2]));
 				BlockVector3 max = BlockVector3.at(Integer.parseInt(maxpoint[0]), Integer.parseInt(maxpoint[1]), Integer.parseInt(maxpoint[2]));
 
-				list.add(new GameMap(s, schematicWorld, min, max, spawn, minY));
+				list.add(new GameMap(s, schematicWorld, min, max, spawn, minY, loseloc, winloc));
 				Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Loaded map " + s);
 			} catch(Exception e) {
 				failed++;
@@ -113,12 +125,24 @@ public class FilesStorage implements Storage {
 
 			double minY = this.config.getDouble(s + ".minY");
 
+			Location loseloc = new Location(
+					Bukkit.getWorld(this.config.getString(s + ".spawn.world")),
+					this.config.getDouble(s + ".loseloc.x"),
+					this.config.getDouble(s + ".loseloc.y"),
+					this.config.getDouble(s + ".loseloc.z"));
+
+			Location winloc = new Location(
+					Bukkit.getWorld(this.config.getString(s + ".spawn.world")),
+					this.config.getDouble(s + ".winloc.x"),
+					this.config.getDouble(s + ".winloc.y"),
+					this.config.getDouble(s + ".winloc.z"));
+
 			String[] minpoint = this.config.getString(s + ".minpoint").split(",");
 			String[] maxpoint = this.config.getString(s + ".minpoint").split(",");
 			BlockVector3 min = BlockVector3.at(Integer.parseInt(minpoint[0]), Integer.parseInt(minpoint[1]), Integer.parseInt(minpoint[2]));
 			BlockVector3 max = BlockVector3.at(Integer.parseInt(maxpoint[0]), Integer.parseInt(maxpoint[1]), Integer.parseInt(maxpoint[2]));
 
-			return new GameMap(s, schematicWorld, min, max, spawn, minY);
+			return new GameMap(s, schematicWorld, min, max, spawn, minY, loseloc, winloc);
 		}
 		return null;
 	}

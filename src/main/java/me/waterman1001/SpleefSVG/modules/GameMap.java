@@ -33,15 +33,15 @@ public class GameMap {
 	private BlockVector3 max;
     private double minY;
 	
-	public GameMap(String name, World schematicWorld, BlockVector3 min, BlockVector3 max, Location spawn, double minY) {
+	public GameMap(String name, World schematicWorld, BlockVector3 min, BlockVector3 max, Location spawn, double minY, Location loseloc, Location winloc) {
 		this.name = name;
         this.setSpawn(spawn);
         this.schematicWorld = schematicWorld;
         this.min = min;
 		this.max = max;
 		this.minY = minY;
-		this.loseloc = spawn;
-		this.winloc = spawn;
+		this.loseloc = loseloc;
+		this.winloc = winloc;
 
 		schematicFile = new File(Main.getInstance().getDataFolder(), name.toLowerCase() + ".schem");
 		if(!schematicFile.exists()) {
