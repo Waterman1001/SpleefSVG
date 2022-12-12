@@ -175,7 +175,7 @@ public class GameManager {
 	 * @return String      Messages of success/failure
 	 */
 	public String joinPlayer(Player p) {
-		if(!p.getWorld().getName().equalsIgnoreCase("Spawn") && !p.getWorld().getName().equalsIgnoreCase("Minigames")) return ChatColor.RED + "Unfortunately, you are not able to join Spleef from this world directly.";
+		if(!p.getWorld().getName().equalsIgnoreCase("Minigames")) return ChatColor.RED + "Unfortunately, you are not able to join Spleef from this world directly.";
 		if(getPlayerGame(p) != null) return Messages.getInstance().alreadyInGame();
 		if(getPlayerGameSpectator(p) != null) return Messages.getInstance().youAreSpectating();
 
@@ -192,6 +192,24 @@ public class GameManager {
 			game = available.get(i);
 		}
 		
+		if(game.getGs().addPlayer(p))
+			return Messages.getInstance().joiningGame();
+		else
+			return Messages.getInstance().couldntAddToGame();
+	}
+
+	/**
+	 * Adds a player to a specified game
+	 *
+	 * @param p            Player to add to the game
+	 * @param game		   Game to add the player to
+	 * @return String      Messages of success/failure
+	 */
+	public String joinPlayer(Player p, Game game) {
+		if(!p.getWorld().getName().equalsIgnoreCase("Minigames")) return ChatColor.RED + "Unfortunately, you are not able to join Spleef from this world directly.";
+		if(getPlayerGame(p) != null) return Messages.getInstance().alreadyInGame();
+		if(getPlayerGameSpectator(p) != null) return Messages.getInstance().youAreSpectating();
+
 		if(game.getGs().addPlayer(p))
 			return Messages.getInstance().joiningGame();
 		else
