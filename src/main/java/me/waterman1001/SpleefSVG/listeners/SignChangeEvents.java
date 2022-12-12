@@ -11,7 +11,7 @@ public class SignChangeEvents implements Listener {
     @EventHandler
     public void onJoinSignCreation(SignChangeEvent e) {
         Player p = e.getPlayer();
-        if(p.hasPermission("spleef.signs")) {
+        if(p.hasPermission("spleefsvg.signs")) {
             if (e.getLine(0).equalsIgnoreCase("[SpleefSVG]")){
                 if(e.getLine(1).equalsIgnoreCase("Join")) {
                     if(!e.getLine(2).isEmpty()) {

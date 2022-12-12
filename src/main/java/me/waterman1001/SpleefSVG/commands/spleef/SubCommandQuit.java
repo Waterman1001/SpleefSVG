@@ -13,7 +13,7 @@ public class SubCommandQuit extends BukkitSubCommand {
 	public void onCommand(CommandSender cs, String[] args) {
 		Player p = (Player)cs;
 		
-		if(!p.hasPermission("spleef.command.quit")) {
+		if(!p.hasPermission("spleefsvg.command.quit")) {
 			p.sendMessage(Messages.noPermissions);
 			return;
 		}

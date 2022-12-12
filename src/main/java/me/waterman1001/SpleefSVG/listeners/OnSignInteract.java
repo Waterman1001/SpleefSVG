@@ -23,7 +23,7 @@ public class OnSignInteract implements Listener {
                     if (!sign.getLine(2).isEmpty()) {
                         String map_name = sign.getLine(2);
 
-                        if(!p.hasPermission("spleef.sign.join")) {
+                        if(!p.hasPermission("spleefsvg.sign.join")) {
                             p.sendMessage(Messages.noPermissions);
                             return;
                         }
@@ -40,7 +40,7 @@ public class OnSignInteract implements Listener {
                 } else if(sign.getLine(1).equals("§8[§cLeave§8]")) {
                     if(sign.getLine(2).isEmpty() && sign.getLine(3).isEmpty()) {
 
-                        if(!p.hasPermission("spleef.sign.quit")) {
+                        if(!p.hasPermission("spleefsvg.sign.quit")) {
                             p.sendMessage(Messages.noPermissions);
                             return;
                         }

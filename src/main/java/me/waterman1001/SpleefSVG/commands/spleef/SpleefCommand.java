@@ -48,7 +48,7 @@ public class SpleefCommand implements CommandExecutor {
 			Player p = (Player) cs;
 			
 			if(args.length == 0) {
-				if(!p.hasPermission("spleef.commandlist")) {
+				if(!p.hasPermission("spleefsvg.commandlist")) {
 					p.sendMessage(Messages.noPermissions);
 					return true;
 				}
@@ -58,7 +58,7 @@ public class SpleefCommand implements CommandExecutor {
 			
 			BukkitSubCommand subcommand = getSubCommand(args[0].toLowerCase());
 			if(subcommand == null) {
-				if(!p.hasPermission("spleef.commandlist")) {
+				if(!p.hasPermission("spleefsvg.commandlist")) {
 					p.sendMessage(Messages.noPermissions);
 					return true;
 				}
@@ -103,17 +103,17 @@ public class SpleefCommand implements CommandExecutor {
 	 */
 	public void commandList(Player p) {
 		p.sendMessage("§e===== §8[§6SpleefSVG§8]§a §e=====");
-		if(p.hasPermission("spleef.command.join")) p.sendMessage(ChatColor.GOLD + "/spleef join");
-		if(p.hasPermission("spleef.command.quit")) p.sendMessage(ChatColor.GOLD + "/spleef quit");
-		if(p.hasPermission("spleef.command.forcestart")) p.sendMessage(ChatColor.GOLD + "/spleef forcestart");
-		if(p.hasPermission("spleef.command.spectate")) p.sendMessage(ChatColor.GOLD + "/spleef spectate <player>");
-		if(p.hasPermission("spleef.command.map")) p.sendMessage(ChatColor.GOLD + "/spleef map");
-		if(p.hasPermission("spleef.command.map.list")) p.sendMessage(ChatColor.GOLD + "/spleef map list");
-		if(p.hasPermission("spleef.command.map.create")) p.sendMessage(ChatColor.GOLD + "/spleef map create");
-		if(p.hasPermission("spleef.command.map.remove")) p.sendMessage(ChatColor.GOLD + "/spleef map remove");
-		if(p.hasPermission("spleef.command.map.setminy")) p.sendMessage(ChatColor.GOLD + "/spleef map setminy");
-		if(p.hasPermission("spleef.command.map.setspawn")) p.sendMessage(ChatColor.GOLD + "/spleef map setspawn");
-		if(p.hasPermission("spleef.command.map.setloseloc")) p.sendMessage(ChatColor.GOLD + "/spleef map setloseloc");
-		if(p.hasPermission("spleef.command.map.setwinloc")) p.sendMessage(ChatColor.GOLD + "/spleef map setwinloc");
+		if(p.hasPermission("spleefsvg.command.join")) p.sendMessage(ChatColor.GOLD + "/spleef join");
+		if(p.hasPermission("spleefsvg.command.quit")) p.sendMessage(ChatColor.GOLD + "/spleef quit");
+		if(p.hasPermission("spleefsvg.command.forcestart")) p.sendMessage(ChatColor.GOLD + "/spleef forcestart");
+		if(p.hasPermission("spleefsvg.command.spectate")) p.sendMessage(ChatColor.GOLD + "/spleef spectate <player>");
+		if(p.hasPermission("spleefsvg.command.map")) p.sendMessage(ChatColor.GOLD + "/spleef map");
+		if(p.hasPermission("spleefsvg.command.map.list")) p.sendMessage(ChatColor.GOLD + "/spleef map list");
+		if(p.hasPermission("spleefsvg.command.map.create")) p.sendMessage(ChatColor.GOLD + "/spleef map create");
+		if(p.hasPermission("spleefsvg.command.map.remove")) p.sendMessage(ChatColor.GOLD + "/spleef map remove");
+		if(p.hasPermission("spleefsvg.command.map.setminy")) p.sendMessage(ChatColor.GOLD + "/spleef map setminy");
+		if(p.hasPermission("spleefsvg.command.map.setspawn")) p.sendMessage(ChatColor.GOLD + "/spleef map setspawn");
+		if(p.hasPermission("spleefsvg.command.map.setloseloc")) p.sendMessage(ChatColor.GOLD + "/spleef map setloseloc");
+		if(p.hasPermission("spleefsvg.command.map.setwinloc")) p.sendMessage(ChatColor.GOLD + "/spleef map setwinloc");
 	}
 }

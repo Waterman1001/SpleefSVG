@@ -13,7 +13,7 @@ public class SubCommandForcestart extends BukkitSubCommand {
 	public void onCommand(CommandSender cs, String[] args) {
 		Player p = (Player)cs;
 		
-		if(!p.hasPermission("spleef.command.forcestart")) {
+		if(!p.hasPermission("spleefsvg.command.forcestart")) {
 			p.sendMessage(Messages.noPermissions);
 			return;
 		}

@@ -13,7 +13,7 @@ public class SubCommandMap extends BukkitSubCommand {
 	public void onCommand(CommandSender cs, String[] args) {
 		Player p = (Player)cs;
 		
-		if(!p.hasPermission("spleef.command.map")) {
+		if(!p.hasPermission("spleefsvg.command.map")) {
 			p.sendMessage(Messages.noPermissions);
 			return;
 		}
@@ -26,14 +26,14 @@ public class SubCommandMap extends BukkitSubCommand {
 		String action = args[0];
 		
 		if(action.equalsIgnoreCase("list") || action.equalsIgnoreCase("maps")) {
-			if(!p.hasPermission("spleef.command.map.list")) {
+			if(!p.hasPermission("spleefsvg.command.map.list")) {
 				p.sendMessage(Messages.noPermissions);
 				return;
 			}
 			p.sendMessage(GameManager.getInstance().mapsList());
 			return;
 		} else if(action.equalsIgnoreCase("create") || action.equalsIgnoreCase("add")) {
-			if(!p.hasPermission("spleef.command.map.create")) {
+			if(!p.hasPermission("spleefsvg.command.map.create")) {
 				p.sendMessage(Messages.noPermissions);
 				return;
 			}
@@ -46,7 +46,7 @@ public class SubCommandMap extends BukkitSubCommand {
 			p.sendMessage(GameManager.getInstance().addMap(p, args[1]));
 			return;
 		} else if(action.equalsIgnoreCase("remove") || action.equalsIgnoreCase("delete")) {
-			if(!p.hasPermission("spleef.command.map.remove")) {
+			if(!p.hasPermission("spleefsvg.command.map.remove")) {
 				p.sendMessage(Messages.noPermissions);
 				return;
 			}
@@ -59,7 +59,7 @@ public class SubCommandMap extends BukkitSubCommand {
 			p.sendMessage(GameManager.getInstance().removeMap(p, args[1]));
 			return;
 		} else if(action.equalsIgnoreCase("setminy") || action.equalsIgnoreCase("sety") || action.equalsIgnoreCase("setminimumy") || action.equalsIgnoreCase("miny")) {
-			if(!p.hasPermission("spleef.command.map.setminy")) {
+			if(!p.hasPermission("spleefsvg.command.map.setminy")) {
 				p.sendMessage(Messages.noPermissions);
 				return;
 			}
@@ -72,7 +72,7 @@ public class SubCommandMap extends BukkitSubCommand {
 			p.sendMessage(GameManager.getInstance().setMapMiny(p, args[1]));
 			return;
 		} else if(action.equalsIgnoreCase("setspawn") || action.equalsIgnoreCase("spawn") || action.equalsIgnoreCase("setmapspawn")) {
-			if (!p.hasPermission("spleef.command.map.setspawn")) {
+			if (!p.hasPermission("spleefsvg.command.map.setspawn")) {
 				p.sendMessage(Messages.noPermissions);
 				return;
 			}
@@ -85,7 +85,7 @@ public class SubCommandMap extends BukkitSubCommand {
 			p.sendMessage(GameManager.getInstance().setMapSpawn(p, args[1]));
 			return;
 		} else if(action.equalsIgnoreCase("setloseloc") || action.equalsIgnoreCase("loseloc")) {
-			if(!p.hasPermission("spleef.command.map.setloseloc")) {
+			if(!p.hasPermission("spleefsvg.command.map.setloseloc")) {
 				p.sendMessage(Messages.noPermissions);
 				return;
 			}
@@ -98,7 +98,7 @@ public class SubCommandMap extends BukkitSubCommand {
 			p.sendMessage(GameManager.getInstance().setLoseLoc(p, args[1]));
 			return;
 		} else if(action.equalsIgnoreCase("setwinloc") || action.equalsIgnoreCase("winloc")) {
-			if(!p.hasPermission("spleef.command.map.setwinloc")) {
+			if(!p.hasPermission("spleefsvg.command.map.setwinloc")) {
 				p.sendMessage(Messages.noPermissions);
 				return;
 			}

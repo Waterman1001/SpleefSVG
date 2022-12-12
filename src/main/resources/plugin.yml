@@ -12,39 +12,39 @@ commands:
         description: Main spleef command. Go and play!
 
 permissions:
-    spleef.command.*:
+    spleefsvg.command.*:
         description: Permissions to all of the /spleef sub commands
         default: false
         children:
-            spleef.commandlist: true
-            spleef.command.join: true
-            spleef.command.quit: true
-            spleef.command.forcestart: true
-            spleef.command.spectate: true
-            spleef.command.map.list: true
-            spleef.command.map.create: true
-            spleef.command.map.remove: true
-            spleef.command.map.setminy: true
-            spleef.command.map.setspawn: true
-            spleef.command.map.setloseloc: true
-            spleef.command.map.setwinloc: true
-    spleef.player:
+            spleefsvg.commandlist: true
+            spleefsvg.command.join: true
+            spleefsvg.command.quit: true
+            spleefsvg.command.forcestart: true
+            spleefsvg.command.spectate: true
+            spleefsvg.command.map.list: true
+            spleefsvg.command.map.create: true
+            spleefsvg.command.map.remove: true
+            spleefsvg.command.map.setminy: true
+            spleefsvg.command.map.setspawn: true
+            spleefsvg.command.map.setloseloc: true
+            spleefsvg.command.map.setwinloc: true
+    spleefsvg.player:
          description: Permissions to all of the /spleef sub commands necessary for a player
          default: false
          children:
-             spleef.commandlist: true
-             spleef.command.join: true
-             spleef.command.quit: true
-    spleef.admin:
+             spleefsvg.commandlist: true
+             spleefsvg.command.join: true
+             spleefsvg.command.quit: true
+    spleefsvg.admin:
          description: Permissions to all of the /spleef sub commands necessary for an admin
          default: false
          children:
-             spleef.command.forcestart: true
-             spleef.command.spectate: true
-             spleef.command.map.list: true
-             spleef.command.map.create: true
-             spleef.command.map.remove: true
-             spleef.command.map.setminy: true
-             spleef.command.map.setspawn: true
-             spleef.command.map.setloseloc: true
-             spleef.command.map.setwinloc: true
+             spleefsvg.command.forcestart: true
+             spleefsvg.command.spectate: true
+             spleefsvg.command.map.list: true
+             spleefsvg.command.map.create: true
+             spleefsvg.command.map.remove: true
+             spleefsvg.command.map.setminy: true
+             spleefsvg.command.map.setspawn: true
+             spleefsvg.command.map.setloseloc: true
+             spleefsvg.command.map.setwinloc: true

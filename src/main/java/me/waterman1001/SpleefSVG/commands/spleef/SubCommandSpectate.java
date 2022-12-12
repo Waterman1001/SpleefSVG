@@ -14,7 +14,7 @@ public class SubCommandSpectate extends BukkitSubCommand {
 	public void onCommand(CommandSender cs, String[] args) {
 		Player p = (Player)cs;
 		
-		if(!p.hasPermission("spleef.command.spectate")) {
+		if(!p.hasPermission("spleefsvg.command.spectate")) {
 			p.sendMessage(Messages.noPermissions);
 			return;
 		}
