@@ -45,8 +45,11 @@ public class BlockEvents implements Listener {
 		Bukkit.getPluginManager().callEvent(event);
 
 		if (!event.isCancelled()) {
-			if (e.getClickedBlock().getType() == Material.SNOW_BLOCK || e.getClickedBlock().getType() == Material.SNOW
-					|| e.getClickedBlock().getType() == Material.PACKED_ICE || Tag.WOOL.isTagged(e.getClickedBlock().getType())) {
+			Material clickedBlock = e.getClickedBlock().getType();
+			if (clickedBlock == Material.SNOW_BLOCK || clickedBlock == Material.SNOW
+					|| clickedBlock == Material.PACKED_ICE || clickedBlock == Material.CUT_SANDSTONE
+					|| clickedBlock == Material.BROWN_MUSHROOM_BLOCK || Tag.WOOL.isTagged(clickedBlock)
+					|| Tag.LOGS.isTagged(clickedBlock) || Tag.TERRACOTTA.isTagged(clickedBlock)) {
 				e.getClickedBlock().getDrops().clear();
 				event.getBlock().getDrops().clear();
 				e.getClickedBlock().setType(Material.AIR);
