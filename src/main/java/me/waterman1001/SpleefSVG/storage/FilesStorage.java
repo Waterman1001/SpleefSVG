@@ -43,7 +43,9 @@ public class FilesStorage implements Storage {
 						Bukkit.getWorld(this.config.getString(s + ".spawn.world")),
 						this.config.getDouble(s + ".spawn.x"),
 						this.config.getDouble(s + ".spawn.y"),
-						this.config.getDouble(s + ".spawn.z"));
+						this.config.getDouble(s + ".spawn.z"),
+						this.config.getLong(s + ".winloc.yaw"),
+						this.config.getLong(s + ".winloc.pitch"));
 
 				double minY = this.config.getDouble(s + ".minY");
 
@@ -51,13 +53,17 @@ public class FilesStorage implements Storage {
 						Bukkit.getWorld(this.config.getString(s + ".spawn.world")),
 						this.config.getDouble(s + ".loseloc.x"),
 						this.config.getDouble(s + ".loseloc.y"),
-						this.config.getDouble(s + ".loseloc.z"));
+						this.config.getDouble(s + ".loseloc.z"),
+						this.config.getLong(s + ".loseloc.yaw"),
+						this.config.getLong(s + ".loseloc.pitch"));
 
 				Location winloc = new Location(
 						Bukkit.getWorld(this.config.getString(s + ".spawn.world")),
 						this.config.getDouble(s + ".winloc.x"),
 						this.config.getDouble(s + ".winloc.y"),
-						this.config.getDouble(s + ".winloc.z"));
+						this.config.getDouble(s + ".winloc.z"),
+						this.config.getLong(s + ".winloc.yaw"),
+						this.config.getLong(s + ".winloc.pitch"));
 
 				String[] minpoint = this.config.getString(s + ".minpoint").split(",");
 				String[] maxpoint = this.config.getString(s + ".minpoint").split(",");
@@ -80,12 +86,18 @@ public class FilesStorage implements Storage {
 		this.config.set(map.getName().toLowerCase() + ".spawn.x", map.getSpawn().getX());
 		this.config.set(map.getName().toLowerCase() + ".spawn.y", map.getSpawn().getY());
 		this.config.set(map.getName().toLowerCase() + ".spawn.z", map.getSpawn().getZ());
+		this.config.set(map.getName().toLowerCase() + ".spawn.yaw", map.getSpawn().getYaw());
+		this.config.set(map.getName().toLowerCase() + ".spawn.pitch", map.getSpawn().getPitch());
 		this.config.set(map.getName().toLowerCase() + ".loseloc.x", map.getLoseLoc().getX());
 		this.config.set(map.getName().toLowerCase() + ".loseloc.y", map.getLoseLoc().getY());
 		this.config.set(map.getName().toLowerCase() + ".loseloc.z", map.getLoseLoc().getZ());
+		this.config.set(map.getName().toLowerCase() + ".loseloc.yaw", map.getLoseLoc().getYaw());
+		this.config.set(map.getName().toLowerCase() + ".loseloc.pitch", map.getLoseLoc().getPitch());
 		this.config.set(map.getName().toLowerCase() + ".winloc.x", map.getWinLoc().getX());
 		this.config.set(map.getName().toLowerCase() + ".winloc.y", map.getWinLoc().getY());
 		this.config.set(map.getName().toLowerCase() + ".winloc.z", map.getWinLoc().getZ());
+		this.config.set(map.getName().toLowerCase() + ".winloc.yaw", map.getWinLoc().getYaw());
+		this.config.set(map.getName().toLowerCase() + ".winloc.pitch", map.getWinLoc().getPitch());
 		this.config.set(map.getName().toLowerCase() + ".minY", map.getminY());
 		this.config.set(map.getName().toLowerCase() + ".maxpoint", map.getMaxPoint().toParserString());
 		this.config.set(map.getName().toLowerCase() + ".minpoint", map.getMinPoint().toParserString());
@@ -121,7 +133,9 @@ public class FilesStorage implements Storage {
 					Bukkit.getWorld(this.config.getString(s + ".spawn.world")),
 					this.config.getDouble(s + ".spawn.x"),
 					this.config.getDouble(s + ".spawn.y"),
-					this.config.getDouble(s + ".spawn.z"));
+					this.config.getDouble(s + ".spawn.z"),
+					this.config.getLong(s + ".spawn.yaw"),
+					this.config.getLong(s + ".spawn.pitch"));
 
 			double minY = this.config.getDouble(s + ".minY");
 
@@ -129,13 +143,17 @@ public class FilesStorage implements Storage {
 					Bukkit.getWorld(this.config.getString(s + ".spawn.world")),
 					this.config.getDouble(s + ".loseloc.x"),
 					this.config.getDouble(s + ".loseloc.y"),
-					this.config.getDouble(s + ".loseloc.z"));
+					this.config.getDouble(s + ".loseloc.z"),
+					this.config.getLong(s + ".loseloc.yaw"),
+					this.config.getLong(s + ".loseloc.pitch"));
 
 			Location winloc = new Location(
 					Bukkit.getWorld(this.config.getString(s + ".spawn.world")),
 					this.config.getDouble(s + ".winloc.x"),
 					this.config.getDouble(s + ".winloc.y"),
-					this.config.getDouble(s + ".winloc.z"));
+					this.config.getDouble(s + ".winloc.z"),
+					this.config.getLong(s + ".winloc.yaw"),
+					this.config.getLong(s + ".winloc.pitch"));
 
 			String[] minpoint = this.config.getString(s + ".minpoint").split(",");
 			String[] maxpoint = this.config.getString(s + ".minpoint").split(",");
