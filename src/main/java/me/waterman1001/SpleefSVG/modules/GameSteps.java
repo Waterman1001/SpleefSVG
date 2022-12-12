@@ -218,6 +218,7 @@ public class GameSteps {
 		if(this.game.startedCountdown() && GameManager.getInstance().getThreads().get(this.game) != null) {
 			GameManager.getInstance().getThreads().get(this.game).cancel();
 			GameManager.getInstance().getThreads().remove(this.game);
+			this.game.setStartedCountdown(false);
 		}
 	}
 	
@@ -254,16 +255,13 @@ public class GameSteps {
 		}
 		
 		this.game.setPlayers(new Player[1]);
-		endGame();
 
-		/*
 		Bukkit.getScheduler().runTaskLater(Main.getInstance(), new Runnable() {
 			@Override
 			public void run() {
 				endGame();
 			}
-		}, Main.getVars().getWinTime()*20);
-		*/
+		}, 10/*Main.getVars().getWinTime()*20*/);
 	}
 
 	public void endGame() {

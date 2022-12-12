@@ -160,8 +160,8 @@ public class Messages {
 		return getFixed("endingGame", null, null, null, -1, -1, -1);
 	}
 	
-	public  String wonTheGame(Player p) {
-		return getFixed("wonTheGame", p, null, null, -1, -1, -1);
+	public  String wonTheGame(Player p, String mapName) {
+		return getFixed("wonTheGame", p, null, mapName, -1, -1, -1);
 	}
 	
 	public  String getFixed(String value, Player p, Player t, String mapName, int playerAmount, int max, int seconds) {
