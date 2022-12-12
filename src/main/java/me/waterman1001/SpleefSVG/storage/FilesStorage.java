@@ -44,8 +44,8 @@ public class FilesStorage implements Storage {
 						this.config.getDouble(s + ".spawn.x"),
 						this.config.getDouble(s + ".spawn.y"),
 						this.config.getDouble(s + ".spawn.z"),
-						this.config.getLong(s + ".winloc.yaw"),
-						this.config.getLong(s + ".winloc.pitch"));
+						this.config.getLong(s + ".spawn.yaw"),
+						this.config.getLong(s + ".spawn.pitch"));
 
 				double minY = this.config.getDouble(s + ".minY");
 
