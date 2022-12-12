@@ -120,8 +120,14 @@ public class GameSteps {
 					SpleefPlayerUtils.respawnPlayer(p);
 				} else if(reason == LoseReason.LEAVE_MATCH) {
 					SpleefPlayerUtils.respawnPlayer(p);
-				} else if(reason == LoseReason.FALL || reason == LoseReason.WIN) {
-					addSpectator(p);
+				} else if(reason == LoseReason.FALL) {
+					SpleefPlayerUtils.clearInventory(p);
+					SpleefPlayerUtils.teleport(p, game.getMap().getLoseLoc());
+				} else if(reason == LoseReason.WIN) {
+					SpleefPlayerUtils.clearInventory(p);
+					SpleefPlayerUtils.teleport(p, game.getMap().getWinLoc());
+					// addSpectator(p); // In case we want players to be added as spectator.
+					// However, for Svesti this is not needed at the moment.
 				}
 			}
 		}
@@ -239,7 +245,10 @@ public class GameSteps {
     	
 		for(Player pl : this.game.getPlayers()) {
 			if(pl != null) {
-				addSpectator(pl);
+				SpleefPlayerUtils.teleport(pl, this.game.getMap().getLoseLoc());
+				SpleefPlayerUtils.clearInventory(pl);
+				//addSpectator(pl); // In case we want players to be added as spectator.
+				// However, for Svesti this is not needed at the moment.
 			}
 		}
 		

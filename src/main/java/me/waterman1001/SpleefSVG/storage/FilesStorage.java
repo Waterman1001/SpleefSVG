@@ -68,6 +68,12 @@ public class FilesStorage implements Storage {
 		this.config.set(map.getName().toLowerCase() + ".spawn.x", map.getSpawn().getX());
 		this.config.set(map.getName().toLowerCase() + ".spawn.y", map.getSpawn().getY());
 		this.config.set(map.getName().toLowerCase() + ".spawn.z", map.getSpawn().getZ());
+		this.config.set(map.getName().toLowerCase() + ".loseloc.x", map.getLoseLoc().getX());
+		this.config.set(map.getName().toLowerCase() + ".loseloc.y", map.getLoseLoc().getY());
+		this.config.set(map.getName().toLowerCase() + ".loseloc.z", map.getLoseLoc().getZ());
+		this.config.set(map.getName().toLowerCase() + ".winloc.x", map.getWinLoc().getX());
+		this.config.set(map.getName().toLowerCase() + ".winloc.y", map.getWinLoc().getY());
+		this.config.set(map.getName().toLowerCase() + ".winloc.z", map.getWinLoc().getZ());
 		this.config.set(map.getName().toLowerCase() + ".minY", map.getminY());
 		this.config.set(map.getName().toLowerCase() + ".maxpoint", map.getMaxPoint().toParserString());
 		this.config.set(map.getName().toLowerCase() + ".minpoint", map.getMinPoint().toParserString());

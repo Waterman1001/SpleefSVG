@@ -26,6 +26,8 @@ permissions:
             spleef.command.map.remove: true
             spleef.command.map.setminy: true
             spleef.command.map.setspawn: true
+            spleef.command.map.setloseloc: true
+            spleef.command.map.setwinloc: true
     spleef.player:
          description: Permissions to all of the /spleef sub commands necessary for a player
          default: false
@@ -44,4 +46,5 @@ permissions:
              spleef.command.map.remove: true
              spleef.command.map.setminy: true
              spleef.command.map.setspawn: true
-             spleef.command.map.setlocation: true
+             spleef.command.map.setloseloc: true
+             spleef.command.map.setwinloc: true

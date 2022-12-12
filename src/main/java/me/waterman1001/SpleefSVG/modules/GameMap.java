@@ -26,7 +26,9 @@ public class GameMap {
 	private static File schematicFile = null;
 	private String name;
 	private Location spawn;
-    private World schematicWorld;
+	private Location loseloc;
+	private Location winloc;
+	private World schematicWorld;
 	private BlockVector3 min;
 	private BlockVector3 max;
     private double minY;
@@ -38,6 +40,8 @@ public class GameMap {
         this.min = min;
 		this.max = max;
 		this.minY = minY;
+		this.loseloc = spawn;
+		this.winloc = spawn;
 
 		schematicFile = new File(Main.getInstance().getDataFolder(), name.toLowerCase() + ".schem");
 		if(!schematicFile.exists()) {
@@ -79,8 +83,24 @@ public class GameMap {
 		return spawn;
 	}
 
+	public Location getLoseLoc() {
+		return loseloc;
+	}
+
+	public Location getWinLoc() {
+		return winloc;
+	}
+
 	public void setSpawn(Location spawn) {
 		this.spawn = spawn;
+	}
+
+	public void setLoseLoc(Location loseloc) {
+		this.loseloc = loseloc;
+	}
+
+	public void setWinLoc(Location winloc) {
+		this.winloc = winloc;
 	}
 
 	public void saveSpleefMapSchem() {

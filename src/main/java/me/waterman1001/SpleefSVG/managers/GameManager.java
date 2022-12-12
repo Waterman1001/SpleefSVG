@@ -397,4 +397,55 @@ public class GameManager {
 		else
 			return Messages.getInstance().setMapMinYCouldntSave(mapName);
 	}
+
+	/**
+	 * Sets the lose location of a map
+	 *
+	 * @param p            Location setter
+	 * @param mapName      Name of the map
+	 * @return String      Message of success/failure
+	 */
+	public String setLoseLoc(Player p, String mapName) {
+		GameMap currentMap = null;
+		for(GameMap map : maps) {
+			if(map.getName().equalsIgnoreCase(mapName))
+				currentMap = map;
+		}
+
+		if(currentMap == null)
+			return Messages.getInstance().couldntFindMapNamed(mapName);
+
+		currentMap.setLoseLoc(p.getLocation());
+
+		if(StorageManager.getInstance().getStorage().saveMap(currentMap))
+			return ChatColor.GREEN + "Saved lose location to your current location.";
+		else
+			return ChatColor.RED + "Could not save lose location to your current location.";
+	}
+
+	/**
+	 * Sets the win location of a map
+	 *
+	 * @param p            Location setter
+	 * @param mapName      Name of the map
+	 * @return String      Message of success/failure
+	 */
+	public String setWinLoc(Player p, String mapName) {
+		GameMap currentMap = null;
+		for(GameMap map : maps) {
+			if(map.getName().equalsIgnoreCase(mapName))
+				currentMap = map;
+		}
+
+		if(currentMap == null)
+			return Messages.getInstance().couldntFindMapNamed(mapName);
+
+		currentMap.setWinLoc(p.getLocation());
+
+		if(StorageManager.getInstance().getStorage().saveMap(currentMap))
+			return ChatColor.GREEN + "Saved win location to your current location.";
+		else
+			return ChatColor.RED + "Could not save win location to your current location.";
+	}
+
 }

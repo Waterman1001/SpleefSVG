@@ -72,17 +72,43 @@ public class SubCommandMap extends BukkitSubCommand {
 			p.sendMessage(GameManager.getInstance().setMapMiny(p, args[1]));
 			return;
 		} else if(action.equalsIgnoreCase("setspawn") || action.equalsIgnoreCase("spawn") || action.equalsIgnoreCase("setmapspawn")) {
-			if(!p.hasPermission("spleef.command.map.setspawn")) {
+			if (!p.hasPermission("spleef.command.map.setspawn")) {
 				p.sendMessage(Messages.noPermissions);
 				return;
 			}
-			
+
+			if (args.length == 1) {
+				p.sendMessage(getInfo());
+				return;
+			}
+
+			p.sendMessage(GameManager.getInstance().setMapSpawn(p, args[1]));
+			return;
+		} else if(action.equalsIgnoreCase("setloseloc") || action.equalsIgnoreCase("loseloc")) {
+			if(!p.hasPermission("spleef.command.map.setloseloc")) {
+				p.sendMessage(Messages.noPermissions);
+				return;
+			}
+
 			if(args.length == 1) {
 				p.sendMessage(getInfo());
 				return;
 			}
-			
-			p.sendMessage(GameManager.getInstance().setMapSpawn(p, args[1]));
+
+			p.sendMessage(GameManager.getInstance().setLoseLoc(p, args[1]));
+			return;
+		} else if(action.equalsIgnoreCase("setwinloc") || action.equalsIgnoreCase("winloc")) {
+			if(!p.hasPermission("spleef.command.map.setwinloc")) {
+				p.sendMessage(Messages.noPermissions);
+				return;
+			}
+
+			if(args.length == 1) {
+				p.sendMessage(getInfo());
+				return;
+			}
+
+			p.sendMessage(GameManager.getInstance().setWinLoc(p, args[1]));
 			return;
 		} else {
 			p.sendMessage(getInfo());
