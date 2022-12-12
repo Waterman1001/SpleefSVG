@@ -144,8 +144,8 @@ public class Messages {
 		return getFixed("gameStartsIn", null, null, null, -1, -1, seconds);
 	}
 	
-	public String gameStartsInForBroadcast(int seconds) {
-		return getFixed("gameStartsInBroadcast", null, null, null, -1, -1, seconds);
+	public String gameStartsInForBroadcast(int seconds, String mapName) {
+		return getFixed("gameStartsInBroadcast", null, null, mapName, -1, -1, seconds);
 	}
 	
 	public String startingGame() {

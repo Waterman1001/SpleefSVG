@@ -200,7 +200,7 @@ public class GameSteps {
                 public void run() {
                     i--;
                     if(i%10 == 0)
-                    	Bukkit.broadcastMessage(Messages.getInstance().gameStartsInForBroadcast(i));
+                    	Bukkit.broadcastMessage(Messages.getInstance().gameStartsInForBroadcast(i, myGame.getMap().getName()));
                     if(i%10 == 0 || i <= 5)
                     	broadcastGameMessage(Messages.getInstance().gameStartsIn(i));
                     if(i <= 1) {
