@@ -39,7 +39,7 @@ public class GameMap {
 		this.max = max;
 		this.minY = minY;
 
-		schematicFile = new File(Main.getInstance().getDataFolder(), name + ".schem");
+		schematicFile = new File(Main.getInstance().getDataFolder(), name.toLowerCase() + ".schem");
 		if(!schematicFile.exists()) {
 			saveSpleefMapSchem();
 		} else {
@@ -99,7 +99,7 @@ public class GameMap {
 			throw new RuntimeException(e);
 		}
 
-		File schematic_file = new File(Main.getInstance().getDataFolder(), name + ".schem");
+		File schematic_file = new File(Main.getInstance().getDataFolder(), name.toLowerCase() + ".schem");
 
 		try (ClipboardWriter writer = BuiltInClipboardFormat.SPONGE_SCHEMATIC.getWriter(new FileOutputStream(schematic_file))) {
 			writer.write(clipboard);
@@ -131,7 +131,8 @@ public class GameMap {
 					.to(min)
 					.ignoreAirBlocks(true)
 					.build();
-			Operations.complete(operation); //Paste schematic
+			Operations.complete(operation); // Paste schematic
+			editSession.close(); // YOU NEED TO CLOSE THE SESSION AFTER PASTING OTHERWISE NOTHING HAPPENS.
 			Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Loaded and pasted schematic for map!");
 		} catch (WorldEditException e) { // If worldedit generated an exception it will go here
 			Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Couldn't load the schematic file in the map folder. Please set it up again!");

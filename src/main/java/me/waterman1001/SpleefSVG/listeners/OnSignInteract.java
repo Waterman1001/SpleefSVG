@@ -3,7 +3,6 @@ package me.waterman1001.SpleefSVG.listeners;
 import me.waterman1001.SpleefSVG.managers.GameManager;
 import me.waterman1001.SpleefSVG.modules.Game;
 import me.waterman1001.SpleefSVG.utils.Messages;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
