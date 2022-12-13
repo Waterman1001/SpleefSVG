@@ -47,6 +47,7 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new SpleefPlayerUtils(), this);
 		pm.registerEvents(new SignChangeEvents(), this);
 		pm.registerEvents(new OnSignInteract(), this);
+		pm.registerEvents(new OnPlayerJoin(), this);
 	}
 
 	public void setupManagers() {

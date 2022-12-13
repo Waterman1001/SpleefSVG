@@ -39,7 +39,8 @@ public class PlayerLoseEvents implements Listener {
 	        Bukkit.getPluginManager().callEvent(event);
 	        if(event.isCancelled())
 	        	return;
-	        
+
+			game.getPlayersQuitDuringGame().add(p.getUniqueId()); // Add the player to the players who left during the game array to tp them away on join.
 			game.getGs().removePlayer(p, LoseReason.QUIT_GAME);
 		}
 		
