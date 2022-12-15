@@ -40,7 +40,7 @@ public class FilesStorage implements Storage {
 			try {
 				World schematicWorld = Bukkit.getWorld(this.config.getString(s + ".world"));
 
-				GameType gametype = (GameType) this.config.get(s + ".gametype");
+				GameType gametype = GameType.valueOf(this.config.getString(s + ".gametype"));
 
 				Location spawn = new Location(
 						Bukkit.getWorld(this.config.getString(s + ".spawn.world")),
@@ -133,7 +133,7 @@ public class FilesStorage implements Storage {
 
 			World schematicWorld = Bukkit.getWorld(this.config.getString(s + ".world"));
 
-			GameType gametype = (GameType) this.config.get(s + ".gametype");
+			GameType gametype = GameType.valueOf(this.config.getString(s + ".gametype"));
 				
 			Location spawn = new Location(
 					Bukkit.getWorld(this.config.getString(s + ".spawn.world")),
