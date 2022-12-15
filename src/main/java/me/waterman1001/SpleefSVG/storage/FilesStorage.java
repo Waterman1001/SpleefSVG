@@ -84,7 +84,7 @@ public class FilesStorage implements Storage {
 	}
 	
 	public boolean saveMap(GameMap map) {
-		this.config.set(map.getName().toLowerCase() + ".gametype", map.getGameType());
+		this.config.set(map.getName().toLowerCase() + ".gametype", map.getGameType().name());
 		this.config.set(map.getName().toLowerCase() + ".world", map.getSchematicWorld().getName());
 		this.config.set(map.getName().toLowerCase() + ".spawn.world", map.getSpawn().getWorld().getName());
 		this.config.set(map.getName().toLowerCase() + ".spawn.x", map.getSpawn().getX());

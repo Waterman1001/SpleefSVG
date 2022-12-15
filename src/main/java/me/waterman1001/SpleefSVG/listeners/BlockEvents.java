@@ -98,13 +98,15 @@ public class BlockEvents implements Listener {
 
 					if (game.getMap().getGameType() == GameType.SPLEGG) {
 						Block hitBlock = e.getHitBlock();
-						Material hitBlockType = hitBlock.getType();
-						if (hitBlockType == Material.SNOW_BLOCK || hitBlockType == Material.SNOW
-								|| hitBlockType == Material.PACKED_ICE || hitBlockType == Material.CUT_SANDSTONE
-								|| hitBlockType == Material.BROWN_MUSHROOM_BLOCK || Tag.WOOL.isTagged(hitBlockType)
-								|| Tag.LOGS.isTagged(hitBlockType) || Tag.TERRACOTTA.isTagged(hitBlockType)) {
-							hitBlock.getDrops().clear();
-							hitBlock.setType(Material.AIR);
+						if(hitBlock != null) {
+							Material hitBlockType = hitBlock.getType();
+							if (hitBlockType == Material.SNOW_BLOCK || hitBlockType == Material.SNOW
+									|| hitBlockType == Material.PACKED_ICE || hitBlockType == Material.CUT_SANDSTONE
+									|| hitBlockType == Material.BROWN_MUSHROOM_BLOCK || Tag.WOOL.isTagged(hitBlockType)
+									|| Tag.LOGS.isTagged(hitBlockType) || Tag.TERRACOTTA.isTagged(hitBlockType)) {
+								hitBlock.getDrops().clear();
+								hitBlock.setType(Material.AIR);
+							}
 						}
 						e.setCancelled(true);
 					}

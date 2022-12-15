@@ -115,5 +115,6 @@ public class SpleefCommand implements CommandExecutor {
 		if(p.hasPermission("spleefsvg.command.map.setspawn")) p.sendMessage(ChatColor.GOLD + "/spleef map setspawn");
 		if(p.hasPermission("spleefsvg.command.map.setloseloc")) p.sendMessage(ChatColor.GOLD + "/spleef map setloseloc");
 		if(p.hasPermission("spleefsvg.command.map.setwinloc")) p.sendMessage(ChatColor.GOLD + "/spleef map setwinloc");
+		if(p.hasPermission("spleefsvg.command.map.togglegametype")) p.sendMessage(ChatColor.GOLD + "/spleef map togglegametype");
 	}
 }
