@@ -15,6 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -63,15 +64,15 @@ public class BlockEvents implements Listener {
 				e.setCancelled(true);
 			}
 		} else if(game.getMap().getGameType() == GameType.SPLEGG) {
+			e.setCancelled(true);
 			if (e.getAction() != Action.RIGHT_CLICK_BLOCK && e.getAction() != Action.RIGHT_CLICK_AIR) return;
 
 			PlayerSpleefBlockEvent event = new PlayerSpleefBlockEvent(p, game, e.getClickedBlock());
 			Bukkit.getPluginManager().callEvent(event);
 
 			if (!event.isCancelled()) {
-				p.launchProjectile(Egg.class, p.getLocation().getDirection().multiply(2));
+				p.launchProjectile(Egg.class, p.getLocation().getDirection().multiply(1));
 			}
-			e.setCancelled(true);
 		}
 	}
 	

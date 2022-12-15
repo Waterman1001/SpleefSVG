@@ -369,7 +369,7 @@ public class GameManager {
 		currentMap.setGameType(gametype);
 
 		if(StorageManager.getInstance().getStorage().saveMap(currentMap))
-			return ChatColor.GREEN + "Gametype of game " + currentMap.getName() + " was set to " + ChatColor.BLUE + gametype.name();
+			return ChatColor.GREEN + "Gametype of game " + currentMap.getName() + " was set to " + ChatColor.AQUA + gametype.name();
 		else
 			return Messages.getInstance().setMapSpawnCouldntSave(mapName);
 	}
