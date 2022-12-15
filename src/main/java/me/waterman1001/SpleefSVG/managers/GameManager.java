@@ -16,6 +16,7 @@ import com.sk89q.worldedit.world.World;
 import me.waterman1001.SpleefSVG.Main;
 import me.waterman1001.SpleefSVG.modules.Game;
 import me.waterman1001.SpleefSVG.modules.GameMap;
+import me.waterman1001.SpleefSVG.modules.GameType;
 import me.waterman1001.SpleefSVG.modules.LoseReason;
 import me.waterman1001.SpleefSVG.utils.Messages;
 import org.bukkit.ChatColor;
@@ -300,7 +301,7 @@ public class GameManager {
 		BlockVector3 max = region.getMaximumPoint();
 
 		double minY = p.getLocation().getY();
-		GameMap map = new GameMap(mapName, p.getWorld(), min, max, p.getLocation(), minY, p.getLocation(), p.getLocation());
+		GameMap map = new GameMap(mapName, GameType.SPLEEF, p.getWorld(), min, max, p.getLocation(), minY, p.getLocation(), p.getLocation());
 		maps.add(map);
 		Game game = new Game(map);
 		this.games.add(game);
@@ -347,7 +348,32 @@ public class GameManager {
 		else
 			return Messages.getInstance().mapRemovedCouldntSave(mapName);
 	}
-	
+
+	/**
+	 * Sets the GameType of a map
+	 *
+	 * @param mapName      The map to set the GameType of
+	 * @param gametype     The GameType that was set
+	 * @return String      Message of success
+	 */
+	public String setGameType(String mapName, GameType gametype) {
+		GameMap currentMap = null;
+		for(GameMap map : maps) {
+			if(map.getName().equalsIgnoreCase(mapName))
+				currentMap = map;
+		}
+
+		if(currentMap == null)
+			return Messages.getInstance().couldntFindMapNamed(mapName);
+
+		currentMap.setGameType(gametype);
+
+		if(StorageManager.getInstance().getStorage().saveMap(currentMap))
+			return ChatColor.GREEN + "GameType of game " + currentMap.getName() + " was set to " + gametype.name();
+		else
+			return Messages.getInstance().setMapSpawnCouldntSave(mapName);
+	}
+
 	/**
 	 * Sets the spawn location of a map
 	 * 

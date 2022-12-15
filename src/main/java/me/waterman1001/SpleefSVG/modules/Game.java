@@ -14,7 +14,6 @@ public class Game {
 	private List<Player> spectators;
 	private ArrayList<UUID> playersQuitDuringGame;
 	private GameMap map;
-	
 	private boolean startedCountdown;
 	private boolean startedGame;
 	

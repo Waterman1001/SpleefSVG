@@ -25,6 +25,7 @@ public class GameMap {
 
 	private static File schematicFile = null;
 	private String name;
+	private GameType gametype;
 	private Location spawn;
 	private Location loseloc;
 	private Location winloc;
@@ -33,8 +34,9 @@ public class GameMap {
 	private BlockVector3 max;
     private double minY;
 	
-	public GameMap(String name, World schematicWorld, BlockVector3 min, BlockVector3 max, Location spawn, double minY, Location loseloc, Location winloc) {
+	public GameMap(String name, GameType gametype, World schematicWorld, BlockVector3 min, BlockVector3 max, Location spawn, double minY, Location loseloc, Location winloc) {
 		this.name = name;
+		this.gametype = gametype;
         this.setSpawn(spawn);
         this.schematicWorld = schematicWorld;
         this.min = min;
@@ -57,6 +59,14 @@ public class GameMap {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public GameType getGameType() {
+		return gametype;
+	}
+
+	public void setGameType(GameType gametype) {
+		this.gametype = gametype;
 	}
 
     public World getSchematicWorld() {

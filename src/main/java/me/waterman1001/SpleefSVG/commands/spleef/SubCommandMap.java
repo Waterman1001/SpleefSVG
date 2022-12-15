@@ -2,6 +2,8 @@ package me.waterman1001.SpleefSVG.commands.spleef;
 
 import me.waterman1001.SpleefSVG.commands.BukkitSubCommand;
 import me.waterman1001.SpleefSVG.managers.GameManager;
+import me.waterman1001.SpleefSVG.modules.GameMap;
+import me.waterman1001.SpleefSVG.modules.GameType;
 import me.waterman1001.SpleefSVG.utils.Messages;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -110,6 +112,34 @@ public class SubCommandMap extends BukkitSubCommand {
 
 			p.sendMessage(GameManager.getInstance().setWinLoc(p, args[1]));
 			return;
+		} else if(action.equalsIgnoreCase("togglegametype") || action.equalsIgnoreCase("gametype")) {
+			if(!p.hasPermission("spleefsvg.command.map.togglegametype")) {
+				p.sendMessage(Messages.noPermissions);
+				return;
+			}
+
+			if(args.length == 1) {
+				p.sendMessage(getInfo());
+				return;
+			}
+
+			GameMap currentMap = null;
+			for(GameMap map : GameManager.getInstance().getMaps()) {
+				if(map.getName().equalsIgnoreCase(args[1]))
+					currentMap = map;
+			}
+
+			if(currentMap == null) {
+				p.sendMessage(Messages.getInstance().couldntFindMapNamed(args[1]));
+				return;
+			}
+
+			if(currentMap.getGameType() == GameType.SPLEEF) {
+				p.sendMessage(GameManager.getInstance().setGameType(args[1], GameType.SPLEGG));
+			} else if(currentMap.getGameType() == GameType.SPLEGG) {
+				p.sendMessage(GameManager.getInstance().setGameType(args[1], GameType.SPLEEF));
+			}
+			return;
 		} else {
 			p.sendMessage(getInfo());
 			return;
@@ -123,7 +153,7 @@ public class SubCommandMap extends BukkitSubCommand {
 
 	@Override
 	public String getInfo() {
-		return ChatColor.RED + "Usage: /spleef map <list/create/remove/setminy/setspawn/setloseloc/setwinloc> <mapname>";
+		return ChatColor.RED + "Usage: /spleef map <list/create/remove/setminy/setspawn/setloseloc/setwinloc/togglegametype> <mapname>";
 	}
 
 	@Override

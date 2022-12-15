@@ -28,6 +28,7 @@ permissions:
             spleefsvg.command.map.setspawn: true
             spleefsvg.command.map.setloseloc: true
             spleefsvg.command.map.setwinloc: true
+            spleefsvg.command.map.togglegametype: true
     spleefsvg.player:
          description: Permissions to all of the /spleef sub commands necessary for a player
          default: false
@@ -48,3 +49,4 @@ permissions:
              spleefsvg.command.map.setspawn: true
              spleefsvg.command.map.setloseloc: true
              spleefsvg.command.map.setwinloc: true
+             spleefsvg.command.map.togglegametype: true

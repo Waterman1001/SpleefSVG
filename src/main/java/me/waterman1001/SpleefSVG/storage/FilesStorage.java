@@ -3,6 +3,7 @@ package me.waterman1001.SpleefSVG.storage;
 import com.sk89q.worldedit.math.BlockVector3;
 import me.waterman1001.SpleefSVG.Main;
 import me.waterman1001.SpleefSVG.modules.GameMap;
+import me.waterman1001.SpleefSVG.modules.GameType;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -38,7 +39,9 @@ public class FilesStorage implements Storage {
 		for(String s : this.config.getConfigurationSection("").getKeys(false)) {
 			try {
 				World schematicWorld = Bukkit.getWorld(this.config.getString(s + ".world"));
-				
+
+				GameType gametype = (GameType) this.config.get(s + ".gametype");
+
 				Location spawn = new Location(
 						Bukkit.getWorld(this.config.getString(s + ".spawn.world")),
 						this.config.getDouble(s + ".spawn.x"),
@@ -70,7 +73,7 @@ public class FilesStorage implements Storage {
 				BlockVector3 min = BlockVector3.at(Integer.parseInt(minpoint[0]), Integer.parseInt(minpoint[1]), Integer.parseInt(minpoint[2]));
 				BlockVector3 max = BlockVector3.at(Integer.parseInt(maxpoint[0]), Integer.parseInt(maxpoint[1]), Integer.parseInt(maxpoint[2]));
 
-				list.add(new GameMap(s, schematicWorld, min, max, spawn, minY, loseloc, winloc));
+				list.add(new GameMap(s, gametype, schematicWorld, min, max, spawn, minY, loseloc, winloc));
 				Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Loaded map " + s);
 			} catch(Exception e) {
 				failed++;
@@ -81,6 +84,7 @@ public class FilesStorage implements Storage {
 	}
 	
 	public boolean saveMap(GameMap map) {
+		this.config.set(map.getName().toLowerCase() + ".gametype", map.getGameType());
 		this.config.set(map.getName().toLowerCase() + ".world", map.getSchematicWorld().getName());
 		this.config.set(map.getName().toLowerCase() + ".spawn.world", map.getSpawn().getWorld().getName());
 		this.config.set(map.getName().toLowerCase() + ".spawn.x", map.getSpawn().getX());
@@ -128,6 +132,8 @@ public class FilesStorage implements Storage {
 			if(!s.equalsIgnoreCase(mapName)) continue;
 
 			World schematicWorld = Bukkit.getWorld(this.config.getString(s + ".world"));
+
+			GameType gametype = (GameType) this.config.get(s + ".gametype");
 				
 			Location spawn = new Location(
 					Bukkit.getWorld(this.config.getString(s + ".spawn.world")),
@@ -160,7 +166,7 @@ public class FilesStorage implements Storage {
 			BlockVector3 min = BlockVector3.at(Integer.parseInt(minpoint[0]), Integer.parseInt(minpoint[1]), Integer.parseInt(minpoint[2]));
 			BlockVector3 max = BlockVector3.at(Integer.parseInt(maxpoint[0]), Integer.parseInt(maxpoint[1]), Integer.parseInt(maxpoint[2]));
 
-			return new GameMap(s, schematicWorld, min, max, spawn, minY, loseloc, winloc);
+			return new GameMap(s, gametype, schematicWorld, min, max, spawn, minY, loseloc, winloc);
 		}
 		return null;
 	}
