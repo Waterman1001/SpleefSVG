@@ -84,7 +84,7 @@ public class GameMap {
 	}
 
 	public double getmaxY() {
-		return minY;
+		return maxY;
 	}
 
 	public void setmaxY(double maxY) {

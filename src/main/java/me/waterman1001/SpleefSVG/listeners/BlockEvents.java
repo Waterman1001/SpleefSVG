@@ -53,7 +53,7 @@ public class BlockEvents implements Listener {
 			if (!event.isCancelled()) {
 				Block clickedBlock = e.getClickedBlock();
 				if(clickedBlock != null) {
-					if(clickedBlock.getY() <= game.getMap().getmaxY()) {
+					if(clickedBlock.getY() < game.getMap().getmaxY()) {
 						Material clickedBlockType = clickedBlock.getType();
 						if (clickedBlockType == Material.SNOW_BLOCK || clickedBlockType == Material.SNOW
 								|| clickedBlockType == Material.PACKED_ICE || clickedBlockType == Material.CUT_SANDSTONE
