@@ -300,8 +300,9 @@ public class GameManager {
 		BlockVector3 min = region.getMinimumPoint();
 		BlockVector3 max = region.getMaximumPoint();
 
+		double maxY = p.getLocation().getY();
 		double minY = p.getLocation().getY();
-		GameMap map = new GameMap(mapName, GameType.SPLEEF, p.getWorld(), min, max, p.getLocation(), minY, p.getLocation(), p.getLocation());
+		GameMap map = new GameMap(mapName, GameType.SPLEEF, p.getWorld(), min, max, p.getLocation(), minY, maxY, p.getLocation(), p.getLocation());
 		maps.add(map);
 		Game game = new Game(map);
 		this.games.add(game);
@@ -336,7 +337,7 @@ public class GameManager {
 		}
 		
 		if(currentGame != null) {
-			currentGame.getGs().finishGame();
+			currentGame.getGs().finishGame(false);
 			currentGame.getGs().endGame();
 			games.remove(currentGame);
 		}
@@ -422,6 +423,31 @@ public class GameManager {
 			return Messages.getInstance().setMapMinY(mapName);
 		else
 			return Messages.getInstance().setMapMinYCouldntSave(mapName);
+	}
+
+	/**
+	 * Sets a map maximum Y for checking breaking blocks only underneath this Y level
+	 *
+	 * @param p            Map creator
+	 * @param mapName      Name of the map
+	 * @return String      Message of success/failure
+	 */
+	public String setMapMaxy(Player p, String mapName) {
+		GameMap currentMap = null;
+		for(GameMap map : maps) {
+			if(map.getName().equalsIgnoreCase(mapName))
+				currentMap = map;
+		}
+
+		if(currentMap == null)
+			return Messages.getInstance().couldntFindMapNamed(mapName);
+
+		currentMap.setmaxY(p.getLocation().getY());
+
+		if(StorageManager.getInstance().getStorage().saveMap(currentMap))
+			return "&aSet " + mapName + "'s minimum Y to your Y & saved to config";
+		else
+			return "&cSet " + mapName + "'s minimum Y location to your location but couldn't save it to config";
 	}
 
 	/**

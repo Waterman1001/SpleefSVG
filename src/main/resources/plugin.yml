@@ -25,6 +25,7 @@ permissions:
             spleefsvg.command.map.create: true
             spleefsvg.command.map.remove: true
             spleefsvg.command.map.setminy: true
+            spleefsvg.command.map.setmaxy: true
             spleefsvg.command.map.setspawn: true
             spleefsvg.command.map.setloseloc: true
             spleefsvg.command.map.setwinloc: true
@@ -46,6 +47,7 @@ permissions:
              spleefsvg.command.map.create: true
              spleefsvg.command.map.remove: true
              spleefsvg.command.map.setminy: true
+             spleefsvg.command.map.setmaxy: true
              spleefsvg.command.map.setspawn: true
              spleefsvg.command.map.setloseloc: true
              spleefsvg.command.map.setwinloc: true

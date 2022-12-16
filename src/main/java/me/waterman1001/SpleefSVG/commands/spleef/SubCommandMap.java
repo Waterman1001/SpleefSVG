@@ -60,18 +60,31 @@ public class SubCommandMap extends BukkitSubCommand {
 			
 			p.sendMessage(GameManager.getInstance().removeMap(p, args[1]));
 			return;
-		} else if(action.equalsIgnoreCase("setminy") || action.equalsIgnoreCase("sety") || action.equalsIgnoreCase("setminimumy") || action.equalsIgnoreCase("miny")) {
-			if(!p.hasPermission("spleefsvg.command.map.setminy")) {
+		} else if(action.equalsIgnoreCase("setminy") || action.equalsIgnoreCase("setminimumy") || action.equalsIgnoreCase("miny")) {
+			if (!p.hasPermission("spleefsvg.command.map.setminy")) {
 				p.sendMessage(Messages.noPermissions);
 				return;
 			}
-			
+
+			if (args.length == 1) {
+				p.sendMessage(getInfo());
+				return;
+			}
+
+			p.sendMessage(GameManager.getInstance().setMapMiny(p, args[1]));
+			return;
+		} else if(action.equalsIgnoreCase("setmaxy") || action.equalsIgnoreCase("setmaximumy") || action.equalsIgnoreCase("maxy")) {
+			if(!p.hasPermission("spleefsvg.command.map.setmaxy")) {
+				p.sendMessage(Messages.noPermissions);
+				return;
+			}
+
 			if(args.length == 1) {
 				p.sendMessage(getInfo());
 				return;
 			}
-			
-			p.sendMessage(GameManager.getInstance().setMapMiny(p, args[1]));
+
+			p.sendMessage(GameManager.getInstance().setMapMaxy(p, args[1]));
 			return;
 		} else if(action.equalsIgnoreCase("setspawn") || action.equalsIgnoreCase("spawn") || action.equalsIgnoreCase("setmapspawn")) {
 			if (!p.hasPermission("spleefsvg.command.map.setspawn")) {

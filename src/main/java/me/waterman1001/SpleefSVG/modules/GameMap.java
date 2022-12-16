@@ -32,9 +32,10 @@ public class GameMap {
 	private World schematicWorld;
 	private BlockVector3 min;
 	private BlockVector3 max;
+	private double maxY;
     private double minY;
 	
-	public GameMap(String name, GameType gametype, World schematicWorld, BlockVector3 min, BlockVector3 max, Location spawn, double minY, Location loseloc, Location winloc) {
+	public GameMap(String name, GameType gametype, World schematicWorld, BlockVector3 min, BlockVector3 max, Location spawn, double minY, double maxY, Location loseloc, Location winloc) {
 		this.name = name;
 		this.gametype = gametype;
         this.setSpawn(spawn);
@@ -42,6 +43,7 @@ public class GameMap {
         this.min = min;
 		this.max = max;
 		this.minY = minY;
+		this.maxY = maxY; // MaxY is for determining that only lower than this blocks can be broken.
 		this.loseloc = loseloc;
 		this.winloc = winloc;
 
@@ -79,6 +81,14 @@ public class GameMap {
 
 	public void setminY(double minY) {
 		this.minY = minY;
+	}
+
+	public double getmaxY() {
+		return minY;
+	}
+
+	public void setmaxY(double maxY) {
+		this.maxY = maxY;
 	}
 
 	public BlockVector3 getMinPoint() {

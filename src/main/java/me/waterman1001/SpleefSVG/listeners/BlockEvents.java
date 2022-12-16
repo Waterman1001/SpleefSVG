@@ -51,15 +51,20 @@ public class BlockEvents implements Listener {
 			Bukkit.getPluginManager().callEvent(event);
 
 			if (!event.isCancelled()) {
-				Material clickedBlock = e.getClickedBlock().getType();
-				if (clickedBlock == Material.SNOW_BLOCK || clickedBlock == Material.SNOW
-						|| clickedBlock == Material.PACKED_ICE || clickedBlock == Material.CUT_SANDSTONE
-						|| clickedBlock == Material.BROWN_MUSHROOM_BLOCK || clickedBlock == Material.SEA_LANTERN
-						|| Tag.LOGS.isTagged(clickedBlock) || Tag.TERRACOTTA.isTagged(clickedBlock)
-						|| Tag.WOOL.isTagged(clickedBlock)) {
-					e.getClickedBlock().getDrops().clear();
-					event.getBlock().getDrops().clear();
-					e.getClickedBlock().setType(Material.AIR);
+				Block clickedBlock = e.getClickedBlock();
+				if(clickedBlock != null) {
+					if(clickedBlock.getY() <= game.getMap().getmaxY()) {
+						Material clickedBlockType = clickedBlock.getType();
+						if (clickedBlockType == Material.SNOW_BLOCK || clickedBlockType == Material.SNOW
+								|| clickedBlockType == Material.PACKED_ICE || clickedBlockType == Material.CUT_SANDSTONE
+								|| clickedBlockType == Material.BROWN_MUSHROOM_BLOCK || clickedBlockType == Material.SEA_LANTERN
+								|| Tag.LOGS.isTagged(clickedBlockType) || Tag.TERRACOTTA.isTagged(clickedBlockType)
+								|| Tag.WOOL.isTagged(clickedBlockType)) {
+							e.getClickedBlock().getDrops().clear();
+							event.getBlock().getDrops().clear();
+							e.getClickedBlock().setType(Material.AIR);
+						}
+					}
 				}
 				e.setCancelled(true);
 			}
@@ -100,13 +105,15 @@ public class BlockEvents implements Listener {
 					if (game.getMap().getGameType() == GameType.SPLEGG) {
 						Block hitBlock = e.getHitBlock();
 						if(hitBlock != null) {
-							Material hitBlockType = hitBlock.getType();
-							if (hitBlockType == Material.SNOW_BLOCK || hitBlockType == Material.SNOW
-									|| hitBlockType == Material.PACKED_ICE || hitBlockType == Material.CUT_SANDSTONE
-									|| hitBlockType == Material.BROWN_MUSHROOM_BLOCK || Tag.WOOL.isTagged(hitBlockType)
-									|| Tag.LOGS.isTagged(hitBlockType) || Tag.TERRACOTTA.isTagged(hitBlockType)) {
-								hitBlock.getDrops().clear();
-								hitBlock.setType(Material.AIR);
+							if(hitBlock.getY() <= game.getMap().getmaxY()) {
+								Material hitBlockType = hitBlock.getType();
+								if (hitBlockType == Material.SNOW_BLOCK || hitBlockType == Material.SNOW
+										|| hitBlockType == Material.PACKED_ICE || hitBlockType == Material.CUT_SANDSTONE
+										|| hitBlockType == Material.BROWN_MUSHROOM_BLOCK || Tag.WOOL.isTagged(hitBlockType)
+										|| Tag.LOGS.isTagged(hitBlockType) || Tag.TERRACOTTA.isTagged(hitBlockType)) {
+									hitBlock.getDrops().clear();
+									hitBlock.setType(Material.AIR);
+								}
 							}
 						}
 						e.setCancelled(true);
