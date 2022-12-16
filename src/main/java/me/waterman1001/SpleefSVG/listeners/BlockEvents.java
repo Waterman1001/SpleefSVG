@@ -109,8 +109,9 @@ public class BlockEvents implements Listener {
 								Material hitBlockType = hitBlock.getType();
 								if (hitBlockType == Material.SNOW_BLOCK || hitBlockType == Material.SNOW
 										|| hitBlockType == Material.PACKED_ICE || hitBlockType == Material.CUT_SANDSTONE
-										|| hitBlockType == Material.BROWN_MUSHROOM_BLOCK || Tag.WOOL.isTagged(hitBlockType)
-										|| Tag.LOGS.isTagged(hitBlockType) || Tag.TERRACOTTA.isTagged(hitBlockType)) {
+										|| hitBlockType == Material.BROWN_MUSHROOM_BLOCK || hitBlockType == Material.SEA_LANTERN
+										|| Tag.LOGS.isTagged(hitBlockType) || Tag.TERRACOTTA.isTagged(hitBlockType)
+										|| Tag.WOOL.isTagged(hitBlockType)) {
 									hitBlock.getDrops().clear();
 									hitBlock.setType(Material.AIR);
 								}
