@@ -112,6 +112,7 @@ public class SpleefCommand implements CommandExecutor {
 		if(p.hasPermission("spleefsvg.command.map.create")) p.sendMessage(ChatColor.GOLD + "/spleef map create");
 		if(p.hasPermission("spleefsvg.command.map.remove")) p.sendMessage(ChatColor.GOLD + "/spleef map remove");
 		if(p.hasPermission("spleefsvg.command.map.setminy")) p.sendMessage(ChatColor.GOLD + "/spleef map setminy");
+		if(p.hasPermission("spleefsvg.command.map.setmaxy")) p.sendMessage(ChatColor.GOLD + "/spleef map setmaxy");
 		if(p.hasPermission("spleefsvg.command.map.setspawn")) p.sendMessage(ChatColor.GOLD + "/spleef map setspawn");
 		if(p.hasPermission("spleefsvg.command.map.setloseloc")) p.sendMessage(ChatColor.GOLD + "/spleef map setloseloc");
 		if(p.hasPermission("spleefsvg.command.map.setwinloc")) p.sendMessage(ChatColor.GOLD + "/spleef map setwinloc");

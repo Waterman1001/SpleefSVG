@@ -445,9 +445,9 @@ public class GameManager {
 		currentMap.setmaxY(p.getLocation().getY());
 
 		if(StorageManager.getInstance().getStorage().saveMap(currentMap))
-			return "&aSet " + mapName + "'s minimum Y to your Y & saved to config";
+			return ChatColor.GREEN + "Set " + mapName + "'s minimum Y to your Y & saved to config";
 		else
-			return "&cSet " + mapName + "'s minimum Y location to your location but couldn't save it to config";
+			return ChatColor.RED + "Set " + mapName + "'s minimum Y location to your location but couldn't save it to config";
 	}
 
 	/**
