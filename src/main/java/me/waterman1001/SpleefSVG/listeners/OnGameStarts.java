@@ -4,6 +4,7 @@ import me.waterman1001.SpleefSVG.Main;
 import me.waterman1001.SpleefSVG.listeners.custom.GameStartEvent;
 import me.waterman1001.SpleefSVG.managers.GameManager;
 import me.waterman1001.SpleefSVG.utils.Messages;
+import me.waterman1001.SpleefSVG.utils.SpleefPlayerUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -39,7 +40,7 @@ public class OnGameStarts implements Listener {
                 	e.getGame().getGs().broadcastGameMessage(Messages.getInstance().gameEndsIn(i));
                 if(i <= 1) {
                 	e.getGame().getGs().broadcastGameMessage(Messages.getInstance().endingGame());
-                	e.getGame().getGs().finishGame();
+                	e.getGame().getGs().finishGame(true);
                     return;
                 }
             }

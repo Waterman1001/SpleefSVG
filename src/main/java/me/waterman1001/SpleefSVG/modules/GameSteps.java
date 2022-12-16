@@ -62,7 +62,8 @@ public class GameSteps {
 				SpleefPlayerUtils.teleport(p, this.game.getMap().getSpawn());
 				SpleefPlayerUtils.clearInventory(p);
 				SpleefPlayerUtils.fixPlayer(p);
-				SpleefPlayerUtils.hidePlayersThatArentInGame(p, this.game);
+				// SpleefPlayerUtils.hidePlayersThatArentInGame(p, this.game);
+				// I do not use this because I would like players to see others that are also outside the game.
 				
 				broadcastGameMessage(Messages.getInstance().playerJoinedTheGame(p, getPlayersInGame()));
 				tryToStartCountdown();
@@ -239,10 +240,13 @@ public class GameSteps {
 		}
 		
 		if(amount < 1)
-			finishGame();
+			finishGame(false);
 	}
-	
-	public void finishGame() {
+
+	// Added a boolean here to specify whether all players should be removed and teleported to the lose location or not by this function.
+	// Usually this is not necessary, because it is then already being done by the removePlayer function that is being called before.
+	// However, this is not being done when the timer ends at and the game ends undecided.
+	public void finishGame(boolean removePlayers) {
 		if(GameManager.getInstance().getThreads().containsKey(this.game) && GameManager.getInstance().getThreads().get(this.game) != null)
 			GameManager.getInstance().getThreads().get(this.game).cancel();
 
@@ -251,6 +255,10 @@ public class GameSteps {
 				SpleefPlayerUtils.clearInventory(pl);
 				//addSpectator(pl); // In case we want players to be added as spectator.
 				// However, for Svesti this is not needed at the moment.
+
+				if(removePlayers) {
+					removePlayer(pl, LoseReason.FALL);
+				}
 			}
 		}
 		
