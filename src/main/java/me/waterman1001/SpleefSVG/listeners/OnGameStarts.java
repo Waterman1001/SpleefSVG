@@ -26,7 +26,7 @@ public class OnGameStarts implements Listener {
 			item = new ItemStack(Material.valueOf(Main.getInstance().getConfig().getString("SpleefItem")));
 			ItemMeta itemmeta = item.getItemMeta();
 			if (itemmeta != null) {
-				itemmeta.setDisplayName(ChatColor.GOLD + "SvestiSpleef Shovel");
+				itemmeta.setDisplayName(ChatColor.GOLD + "" + ChatColor.BOLD + "SvestiSpleef Shovel");
 			}
 			item.setItemMeta(itemmeta);
 		}

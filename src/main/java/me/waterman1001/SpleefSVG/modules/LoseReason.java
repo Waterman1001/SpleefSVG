@@ -5,5 +5,6 @@ public enum LoseReason {
 	LEAVE_MATCH,
 	FALL,
 	WIN,
-	TELEPORTING
+	TELEPORTING,
+	GAMETIME
 }

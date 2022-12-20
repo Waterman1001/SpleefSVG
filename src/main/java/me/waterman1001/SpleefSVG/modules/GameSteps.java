@@ -126,6 +126,10 @@ public class GameSteps {
 					SpleefPlayerUtils.teleport(p, game.getMap().getLoseLoc());
 					// addSpectator(p); // In case we want players to be added as spectator.
 					// However, for Svesti this is not needed at the moment.
+				} else if(reason == LoseReason.GAMETIME) { // If the gametime was over then this is the lose reason and you can simply return as there are no winners.
+					SpleefPlayerUtils.clearInventory(p);
+					SpleefPlayerUtils.teleport(p, game.getMap().getLoseLoc());
+					return false;
 				} else if(reason == LoseReason.WIN) {
 					SpleefPlayerUtils.clearInventory(p);
 					SpleefPlayerUtils.teleport(p, game.getMap().getWinLoc());
@@ -138,7 +142,7 @@ public class GameSteps {
 		if(!this.game.startedGame()) {
 			broadcastGameMessage(Messages.getInstance().playerLeftTheGame(p, getPlayersInGame()));
 			tryToStopCountdown();
-		} else {    
+		} else {
 			int amount = getPlayersInGame();
 			if(amount != 0)
 				broadcastGameMessage(Messages.getInstance().playerLostTheGame(p, amount));
@@ -194,7 +198,7 @@ public class GameSteps {
 			
 			final Game myGame = this.game;
 			this.game.setStartedCountdown(true);
-			Bukkit.broadcastMessage(Messages.getInstance().gameStartsInForBroadcast(Main.getVars().getCountdownTime()+1, myGame.getMap().getName()));
+			Bukkit.broadcastMessage(Messages.getInstance().gameStartsInForBroadcast(Main.getVars().getCountdownTime(), myGame.getMap().getName()));
             GameManager.getInstance().getThreads().put(this.game, Bukkit.getServer().getScheduler().runTaskTimer(Main.getInstance(), new Runnable() {
     			int i = Main.getVars().getCountdownTime()+1;
 
@@ -240,14 +244,15 @@ public class GameSteps {
 			}
 		}
 		
-		if(amount < 1)
+		if(amount < 1) {
 			finishGame(false);
+		}
 	}
 
 	// Added a boolean here to specify whether all players should be removed and teleported to the lose location or not by this function.
 	// Usually this is not necessary, because it is then already being done by the removePlayer function that is being called before.
 	// However, this is not being done when the timer ends at and the game ends undecided.
-	public void finishGame(boolean removePlayers) {
+	public void finishGame(boolean gameTimeOver) {
 		if(GameManager.getInstance().getThreads().containsKey(this.game) && GameManager.getInstance().getThreads().get(this.game) != null)
 			GameManager.getInstance().getThreads().get(this.game).cancel();
 
@@ -257,8 +262,8 @@ public class GameSteps {
 				//addSpectator(pl); // In case we want players to be added as spectator.
 				// However, for Svesti this is not needed at the moment.
 
-				if(removePlayers) {
-					removePlayer(pl, LoseReason.FALL);
+				if(gameTimeOver) {
+					removePlayer(pl, LoseReason.GAMETIME);
 				}
 			}
 		}
