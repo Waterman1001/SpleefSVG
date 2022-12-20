@@ -8,7 +8,7 @@
 # ==============================================
 
 # The maximum amount of players in a single game & minimum amount of players in order for a game to start
-MaxPlayersInGame: 10
+MaxPlayersInGame: 8
 MinimumPlayersInGame: 3
 
 # The maximum distance (in blocks) players can get away from the spawn location of a spleef map
