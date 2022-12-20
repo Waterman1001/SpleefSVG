@@ -17,6 +17,7 @@ public class OnPlayerJoin implements Listener {
             if(game.getPlayersQuitDuringGame().contains(p.getUniqueId())) {
                 game.getPlayersQuitDuringGame().remove(p.getUniqueId());
                 SpleefPlayerUtils.teleport(p, game.getMap().getLoseLoc());
+                SpleefPlayerUtils.clearInventory(p); // Make sure the shovel is removed when player joins back.
             }
         }
     }

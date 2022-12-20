@@ -194,14 +194,15 @@ public class GameSteps {
 			
 			final Game myGame = this.game;
 			this.game.setStartedCountdown(true);
+			Bukkit.broadcastMessage(Messages.getInstance().gameStartsInForBroadcast(Main.getVars().getCountdownTime()+1, myGame.getMap().getName()));
             GameManager.getInstance().getThreads().put(this.game, Bukkit.getServer().getScheduler().runTaskTimer(Main.getInstance(), new Runnable() {
     			int i = Main.getVars().getCountdownTime()+1;
 
                 @Override
                 public void run() {
                     i--;
-                    if(i%10 == 0)
-                    	Bukkit.broadcastMessage(Messages.getInstance().gameStartsInForBroadcast(i, myGame.getMap().getName()));
+					//if(i%10 == 0)
+					//	Bukkit.broadcastMessage(Messages.getInstance().gameStartsInForBroadcast(i, myGame.getMap().getName()));
                     if(i%10 == 0 || i <= 5)
                     	broadcastGameMessage(Messages.getInstance().gameStartsIn(i));
                     if(i <= 1) {

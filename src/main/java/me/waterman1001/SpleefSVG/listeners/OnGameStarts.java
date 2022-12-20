@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 public class OnGameStarts implements Listener {
 
@@ -21,8 +22,18 @@ public class OnGameStarts implements Listener {
 		e.getGame().setStartedGame(true);
 		ItemStack item = null;
 		
-		try { item = new ItemStack(Material.valueOf(Main.getInstance().getConfig().getString("SpleefItem"))); }
-		catch (Exception ex) { Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "SpleefItem in config is not valid!"); return; }
+		try {
+			item = new ItemStack(Material.valueOf(Main.getInstance().getConfig().getString("SpleefItem")));
+			ItemMeta itemmeta = item.getItemMeta();
+			if (itemmeta != null) {
+				itemmeta.setDisplayName(ChatColor.GOLD + "SvestiSpleef Shovel");
+			}
+			item.setItemMeta(itemmeta);
+		}
+		catch (Exception ex) {
+			Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "SpleefItem in config is not valid!");
+			return;
+		}
 
 		for(Player pl : e.getGame().getPlayers()) {
 			if(pl == null) continue;
