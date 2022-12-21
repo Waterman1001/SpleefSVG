@@ -208,8 +208,10 @@ public class GameSteps {
 					//if(i%10 == 0)
 					//	Bukkit.broadcastMessage(Messages.getInstance().gameStartsInForBroadcast(i, myGame.getMap().getName()));
                     if(i%10 == 0 || i <= 5)
-                    	broadcastGameMessage(Messages.getInstance().gameStartsIn(i));
-                    if(i <= 1) {
+						if(i != 0) {
+							broadcastGameMessage(Messages.getInstance().gameStartsIn(i));
+						}
+                    if(i < 1) {
                     	GameManager.getInstance().getThreads().get(myGame).cancel();
                     	broadcastGameMessage(Messages.getInstance().startingGame());
                     	startGame();
@@ -225,6 +227,13 @@ public class GameSteps {
 			GameManager.getInstance().getThreads().get(this.game).cancel();
 			GameManager.getInstance().getThreads().remove(this.game);
 			this.game.setStartedCountdown(false);
+		}
+	}
+
+	public void stopAntiCampingTimer() {
+		if(GameManager.getInstance().getAntiCampingTimers().get(this.game) != null) {
+			GameManager.getInstance().getAntiCampingTimers().get(this.game).cancel();
+			GameManager.getInstance().getAntiCampingTimers().remove(this.game);
 		}
 	}
 	
@@ -255,6 +264,8 @@ public class GameSteps {
 	public void finishGame(boolean gameTimeOver) {
 		if(GameManager.getInstance().getThreads().containsKey(this.game) && GameManager.getInstance().getThreads().get(this.game) != null)
 			GameManager.getInstance().getThreads().get(this.game).cancel();
+
+		stopAntiCampingTimer(); // Stop the AntiCampingTimer ticking when the game ends.
 
 		for(Player pl : this.game.getPlayers()) {
 			if(pl != null) {

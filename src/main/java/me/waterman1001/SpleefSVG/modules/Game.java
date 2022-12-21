@@ -1,9 +1,6 @@
 package me.waterman1001.SpleefSVG.modules;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import me.waterman1001.SpleefSVG.Main;
 import org.bukkit.entity.Player;
@@ -13,6 +10,7 @@ public class Game {
 	private Player[] players;
 	private List<Player> spectators;
 	private ArrayList<UUID> playersQuitDuringGame;
+	private HashMap<UUID, Integer> playerToAntiCampingTimer;
 	private GameMap map;
 	private boolean startedCountdown;
 	private boolean startedGame;
@@ -23,6 +21,7 @@ public class Game {
 		this.players = new Player[Main.getVars().getMaxPlayersInGame()];
 		this.spectators = new LinkedList<Player>();
 		this.playersQuitDuringGame = new ArrayList<UUID>();
+		this.playerToAntiCampingTimer = new HashMap<UUID, Integer>();
 		this.map = map;
 		
 		this.startedCountdown = false;
@@ -47,12 +46,20 @@ public class Game {
 		return playersQuitDuringGame;
 	}
 
+	public HashMap<UUID, Integer> getPlayerToAntiCampingTimer() {
+		return playerToAntiCampingTimer;
+	}
+
 	public void setSpectators(List<Player> spectators) {
 		this.spectators = spectators;
 	}
 
 	public GameMap getMap() {
 		return map;
+	}
+
+	public void setPlayerToAntiCampingTimer(HashMap<UUID, Integer> playerToAntiCampingTimer) {
+		this.playerToAntiCampingTimer = playerToAntiCampingTimer;
 	}
 
 	public void setMap(GameMap map) {

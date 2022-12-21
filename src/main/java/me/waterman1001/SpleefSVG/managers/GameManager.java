@@ -31,6 +31,7 @@ public class GameManager {
 	public static GameManager getInstance() { return instance; }
 	
 	private Map<Game, BukkitTask> threads;
+	private Map<Game, BukkitTask> anticampingTimers;
 	private List<GameMap> maps;
 	private List<Game> games;
 	private Map<UUID, ItemStack[]> playersInventory;
@@ -40,6 +41,7 @@ public class GameManager {
 	
 	private GameManager() {
 		this.threads = new HashMap<Game, BukkitTask>();
+		this.anticampingTimers = new HashMap<Game, BukkitTask>();
 		this.maps = new LinkedList<GameMap>();
 		this.games = new LinkedList<Game>();
 		this.setPlayersInventory(new HashMap<UUID, ItemStack[]>());
@@ -67,6 +69,10 @@ public class GameManager {
 	
 	public Map<Game, BukkitTask> getThreads() {
 		return threads;
+	}
+
+	public Map<Game, BukkitTask> getAntiCampingTimers() {
+		return anticampingTimers;
 	}
 
 	public Map<UUID, ItemStack[]> getPlayersInventory() {
@@ -164,6 +170,9 @@ public class GameManager {
 
 		game.setPlayers(new Player[Main.getVars().getMaxPlayersInGame()]);
 		game.setSpectators(new LinkedList<Player>());
+
+		game.setPlayerToAntiCampingTimer(new HashMap<UUID, Integer>());
+		// When reloading a game, also reset the player to anticamping timer mapping.
 		
 		game.setStartedCountdown(false);
 		game.setStartedGame(false);

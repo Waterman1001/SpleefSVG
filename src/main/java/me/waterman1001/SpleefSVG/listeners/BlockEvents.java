@@ -63,6 +63,7 @@ public class BlockEvents implements Listener {
 							e.getClickedBlock().getDrops().clear();
 							event.getBlock().getDrops().clear();
 							e.getClickedBlock().setType(Material.AIR);
+							game.getPlayerToAntiCampingTimer().put(p.getUniqueId(), Main.getVars().getAntiCampingTime()); // Give all anticamping time back again after a block destroy.
 						}
 					}
 				}
@@ -114,6 +115,7 @@ public class BlockEvents implements Listener {
 										|| Tag.WOOL.isTagged(hitBlockType)) {
 									hitBlock.getDrops().clear();
 									hitBlock.setType(Material.AIR);
+									game.getPlayerToAntiCampingTimer().put(p.getUniqueId(), Main.getVars().getAntiCampingTime()); // Give all anticamping time back again after a block destroy.
 								}
 							}
 						}

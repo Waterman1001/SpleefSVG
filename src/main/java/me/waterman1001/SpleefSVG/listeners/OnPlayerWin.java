@@ -17,7 +17,6 @@ public class OnPlayerWin implements Listener {
 		SpleefPlayerUtils.teleport(e.getPlayer(), e.getGame().getMap().getWinLoc());
 		Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "eco give " + e.getPlayer().getName() + " 50");
 		e.getGame().getGs().finishGame(false);
-		Bukkit.broadcastMessage("Tweede keer");
 	}
 	
 }

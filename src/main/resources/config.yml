@@ -20,6 +20,9 @@ CountdownTime: 20
 # How long will a game last before force-ending (Seconds)
 GameTime: 360
 
+# How can a player destroy no blocks before being teleported down one layer (Seconds)
+AntiCampingTime: 12
+
 # How long will the winning last right after winner is announced (before teleporting all players to spawn) (Seconds)
 WinTime: 10
 
