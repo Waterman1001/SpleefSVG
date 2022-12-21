@@ -4,12 +4,12 @@ import me.waterman1001.SpleefSVG.Main;
 
 public class GlobalVariables {
 
-	public int MAX_PLAYERS_IN_GAME = 12;
+	public int MAX_PLAYERS_IN_GAME = 8;
 	public int MIN_PLAYERS_IN_GAME = 2;
 	public int COUNTDOWN_TIME = 20;
 	public int GAME_TIME = 360;
-	public int ANTICAMPING_TIME = 10;
-	public int WIN_TIME = 12;
+	public int ANTICAMPING_TIME = 12;
+	public int WIN_TIME = 10;
 	public int MAX_DISTANCE_FROM_MAP = 60;
 
 	public GlobalVariables() {
