@@ -1,5 +1,6 @@
 package me.waterman1001.SpleefSVG.listeners;
 
+import me.waterman1001.SpleefSVG.Main;
 import me.waterman1001.SpleefSVG.listeners.custom.PlayerWinEvent;
 import me.waterman1001.SpleefSVG.utils.Messages;
 import me.waterman1001.SpleefSVG.utils.SpleefPlayerUtils;
@@ -15,7 +16,7 @@ public class OnPlayerWin implements Listener {
 		Bukkit.getServer().broadcastMessage(Messages.getInstance().wonTheGame(e.getPlayer(), e.getGame().getMap().getName()));
 		SpleefPlayerUtils.clearInventory(e.getPlayer());
 		SpleefPlayerUtils.teleport(e.getPlayer(), e.getGame().getMap().getWinLoc());
-		Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "eco give " + e.getPlayer().getName() + " 50");
+		Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "eco give " + e.getPlayer().getName() + " " + Main.getVars().getReward());
 		e.getGame().getGs().finishGame(false);
 	}
 	

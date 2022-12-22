@@ -28,3 +28,6 @@ WinTime: 10
 
 # The item players will get when spleef starts!
 SpleefItem: "DIAMOND_SHOVEL"
+
+# Reward the winning player obtains
+Reward: 40

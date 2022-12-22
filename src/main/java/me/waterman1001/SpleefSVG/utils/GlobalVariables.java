@@ -11,6 +11,7 @@ public class GlobalVariables {
 	public int ANTICAMPING_TIME = 12;
 	public int WIN_TIME = 10;
 	public int MAX_DISTANCE_FROM_MAP = 60;
+	public int REWARD = 40;
 
 	public GlobalVariables() {
 		if(Main.getInstance().getConfig() == null)
@@ -36,6 +37,9 @@ public class GlobalVariables {
 		
 		if(Main.getInstance().getConfig().contains("MaxDistanceFromMap"))
 			MAX_DISTANCE_FROM_MAP = Main.getInstance().getConfig().getInt("MaxDistanceFromMap");
+
+		if(Main.getInstance().getConfig().contains("Reward"))
+			REWARD = Main.getInstance().getConfig().getInt("Reward");
 	}
 	
 	public int getMaxPlayersInGame() {
@@ -60,5 +64,8 @@ public class GlobalVariables {
 	}
 	public int getMaxDistanceFromMap() {
 		return this.MAX_DISTANCE_FROM_MAP;
+	}
+	public int getReward() {
+		return this.REWARD;
 	}
 }
