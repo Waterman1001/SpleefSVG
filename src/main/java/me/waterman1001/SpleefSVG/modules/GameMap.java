@@ -171,8 +171,6 @@ public class GameMap {
 			return;
 		}
 
-		Bukkit.broadcastMessage(schematicFile.toString());
-
 		Clipboard clipboard;
 		ClipboardFormat format = ClipboardFormats.findByFile(schematicFile);
 		try (ClipboardReader reader = format.getReader(new FileInputStream(schematicFile))) {
