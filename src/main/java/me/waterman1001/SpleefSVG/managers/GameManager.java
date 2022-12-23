@@ -404,7 +404,7 @@ public class GameManager {
 		currentMap.setAntiCamping(anticamping);
 
 		if(StorageManager.getInstance().getStorage().saveMap(currentMap))
-			return ChatColor.GREEN + "AntiCamping of game " + currentMap.getName() + " was set to " + ChatColor.AQUA + anticamping;
+			return ChatColor.GREEN + "Anticamping of game " + currentMap.getName() + " was set to " + ChatColor.AQUA + anticamping;
 		else
 			return Messages.getInstance().setMapSpawnCouldntSave(mapName);
 	}
