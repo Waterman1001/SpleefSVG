@@ -23,7 +23,7 @@ import java.io.*;
 
 public class GameMap {
 
-	private static File schematicFile = null;
+	private File schematicFile;
 	private String name;
 	private GameType gametype;
 	private boolean anticamping;
@@ -49,7 +49,7 @@ public class GameMap {
 		this.loseloc = loseloc;
 		this.winloc = winloc;
 
-		schematicFile = new File(Main.getInstance().getDataFolder(), name.toLowerCase() + ".schem");
+		this.schematicFile = new File(Main.getInstance().getDataFolder(), name.toLowerCase() + ".schem");
 		if(!schematicFile.exists()) {
 			saveSpleefMapSchem();
 		} else {
@@ -133,6 +133,10 @@ public class GameMap {
 		this.winloc = winloc;
 	}
 
+	public boolean deleteSpleefMapSchem() {
+		return schematicFile.delete();
+	}
+
 	public void saveSpleefMapSchem() {
 		// Adapt the world to be a WorldEdit type World.
 		com.sk89q.worldedit.world.World adaptedWorld = BukkitAdapter.adapt(schematicWorld);
@@ -149,9 +153,9 @@ public class GameMap {
 			throw new RuntimeException(e);
 		}
 
-		File schematic_file = new File(Main.getInstance().getDataFolder(), name.toLowerCase() + ".schem");
+		schematicFile = new File(Main.getInstance().getDataFolder(), name.toLowerCase() + ".schem");
 
-		try (ClipboardWriter writer = BuiltInClipboardFormat.SPONGE_SCHEMATIC.getWriter(new FileOutputStream(schematic_file))) {
+		try (ClipboardWriter writer = BuiltInClipboardFormat.SPONGE_SCHEMATIC.getWriter(new FileOutputStream(schematicFile))) {
 			writer.write(clipboard);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
@@ -162,10 +166,12 @@ public class GameMap {
 	 * Loads the map and pastes it as a schematic
 	 */
 	public void loadMap() {
-		if(schematicFile == null) {
+		if(schematicFile == null || !schematicFile.exists()) {
 			Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Couldn't find the schematic file in the map folder. Please set it up first!");
 			return;
 		}
+
+		Bukkit.broadcastMessage(schematicFile.toString());
 
 		Clipboard clipboard;
 		ClipboardFormat format = ClipboardFormats.findByFile(schematicFile);
@@ -185,7 +191,7 @@ public class GameMap {
 			editSession.close(); // YOU NEED TO CLOSE THE SESSION AFTER PASTING OTHERWISE NOTHING HAPPENS.
 			Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Loaded and pasted schematic for map!");
 		} catch (WorldEditException e) { // If worldedit generated an exception it will go here
-			Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Couldn't load the schematic file in the map folder. Please set it up again!");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Couldn't load the schematic file in the map folder due to WorldEdit problems. Please set it up again!");
 			Bukkit.getPluginManager().disablePlugin(Main.getInstance());
 		} catch (IOException e) {
 			Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Couldn't load the schematic file in the map folder. Please set it up again!");

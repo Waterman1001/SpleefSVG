@@ -13,6 +13,8 @@ public class OnGameEnds implements Listener {
 		for(Player pl : e.getGame().getSpectators())
 			SpleefPlayerUtils.respawnPlayer(pl);
 		 */
-		GameManager.getInstance().reloadGame(e.getGame());
+		if(!e.getGame().isBeingDeleted()) {
+			GameManager.getInstance().reloadGame(e.getGame());
+		}
 	}
 }

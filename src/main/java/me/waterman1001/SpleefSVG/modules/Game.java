@@ -14,6 +14,7 @@ public class Game {
 	private GameMap map;
 	private boolean startedCountdown;
 	private boolean startedGame;
+	private boolean isBeingDeleted;
 	private GameSteps gs;
 	
 	public Game(GameMap map) {
@@ -25,6 +26,8 @@ public class Game {
 		
 		this.startedCountdown = false;
 		this.startedGame = false;
+
+		this.isBeingDeleted = false;
 		
 		this.gs = new GameSteps(this);
 	}
@@ -87,6 +90,14 @@ public class Game {
 		}
 		
 		return amount;
+	}
+
+	public boolean isBeingDeleted() {
+		return isBeingDeleted;
+	}
+
+	public void setBeingDeleted(boolean isBeingDeleted) {
+		this.isBeingDeleted = isBeingDeleted;
 	}
 
 	public GameSteps getGs() {

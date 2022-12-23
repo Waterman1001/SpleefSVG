@@ -346,14 +346,14 @@ public class GameManager {
 		}
 		
 		if(currentGame != null) {
+			currentGame.setBeingDeleted(true);
 			currentGame.getGs().finishGame(false);
-			currentGame.getGs().endGame();
 			games.remove(currentGame);
 		}
 		
 		maps.remove(currentMap);
 		
-		if(StorageManager.getInstance().getStorage().removeMap(mapName))
+		if(StorageManager.getInstance().getStorage().removeMap(mapName) && currentMap.deleteSpleefMapSchem())
 			return Messages.getInstance().removedMapNamed(mapName);
 		else
 			return Messages.getInstance().mapRemovedCouldntSave(mapName);
