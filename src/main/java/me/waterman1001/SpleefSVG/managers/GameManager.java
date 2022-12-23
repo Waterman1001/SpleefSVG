@@ -311,7 +311,7 @@ public class GameManager {
 
 		double maxY = p.getLocation().getY();
 		double minY = p.getLocation().getY();
-		GameMap map = new GameMap(mapName, GameType.SPLEEF, p.getWorld(), min, max, p.getLocation(), minY, maxY, p.getLocation(), p.getLocation());
+		GameMap map = new GameMap(mapName, GameType.SPLEEF, true, p.getWorld(), min, max, p.getLocation(), minY, maxY, p.getLocation(), p.getLocation());
 		maps.add(map);
 		Game game = new Game(map);
 		this.games.add(game);
@@ -380,6 +380,31 @@ public class GameManager {
 
 		if(StorageManager.getInstance().getStorage().saveMap(currentMap))
 			return ChatColor.GREEN + "Gametype of game " + currentMap.getName() + " was set to " + ChatColor.AQUA + gametype.name();
+		else
+			return Messages.getInstance().setMapSpawnCouldntSave(mapName);
+	}
+
+	/**
+	 * Sets AntiCamping of a map
+	 *
+	 * @param mapName      The map to set AntiCamping of
+	 * @param anticamping  The value anticamping was set to (true or false)
+	 * @return String      Message of success
+	 */
+	public String setAntiCamping(String mapName, boolean anticamping) {
+		GameMap currentMap = null;
+		for(GameMap map : maps) {
+			if(map.getName().equalsIgnoreCase(mapName))
+				currentMap = map;
+		}
+
+		if(currentMap == null)
+			return Messages.getInstance().couldntFindMapNamed(mapName);
+
+		currentMap.setAntiCamping(anticamping);
+
+		if(StorageManager.getInstance().getStorage().saveMap(currentMap))
+			return ChatColor.GREEN + "AntiCamping of game " + currentMap.getName() + " was set to " + ChatColor.AQUA + anticamping;
 		else
 			return Messages.getInstance().setMapSpawnCouldntSave(mapName);
 	}

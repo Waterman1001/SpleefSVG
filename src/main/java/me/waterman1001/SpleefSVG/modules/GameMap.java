@@ -26,6 +26,7 @@ public class GameMap {
 	private static File schematicFile = null;
 	private String name;
 	private GameType gametype;
+	private boolean anticamping;
 	private Location spawn;
 	private Location loseloc;
 	private Location winloc;
@@ -35,9 +36,10 @@ public class GameMap {
 	private double maxY;
     private double minY;
 	
-	public GameMap(String name, GameType gametype, World schematicWorld, BlockVector3 min, BlockVector3 max, Location spawn, double minY, double maxY, Location loseloc, Location winloc) {
+	public GameMap(String name, GameType gametype, boolean anticamping, World schematicWorld, BlockVector3 min, BlockVector3 max, Location spawn, double minY, double maxY, Location loseloc, Location winloc) {
 		this.name = name;
 		this.gametype = gametype;
+		this.anticamping = anticamping;
         this.setSpawn(spawn);
         this.schematicWorld = schematicWorld;
         this.min = min;
@@ -69,6 +71,14 @@ public class GameMap {
 
 	public void setGameType(GameType gametype) {
 		this.gametype = gametype;
+	}
+
+	public boolean getAntiCamping() {
+		return anticamping;
+	}
+
+	public void setAntiCamping(boolean anticamping) {
+		this.anticamping = anticamping;
 	}
 
     public World getSchematicWorld() {

@@ -41,6 +41,7 @@ public class FilesStorage implements Storage {
 				World schematicWorld = Bukkit.getWorld(this.config.getString(s + ".world"));
 
 				GameType gametype = GameType.valueOf(this.config.getString(s + ".gametype"));
+				boolean anticamping = this.config.getBoolean(s + ".anticamping");
 
 				Location spawn = new Location(
 						Bukkit.getWorld(this.config.getString(s + ".spawn.world")),
@@ -74,7 +75,7 @@ public class FilesStorage implements Storage {
 				BlockVector3 min = BlockVector3.at(Integer.parseInt(minpoint[0]), Integer.parseInt(minpoint[1]), Integer.parseInt(minpoint[2]));
 				BlockVector3 max = BlockVector3.at(Integer.parseInt(maxpoint[0]), Integer.parseInt(maxpoint[1]), Integer.parseInt(maxpoint[2]));
 
-				list.add(new GameMap(s, gametype, schematicWorld, min, max, spawn, minY, maxY, loseloc, winloc));
+				list.add(new GameMap(s, gametype, anticamping, schematicWorld, min, max, spawn, minY, maxY, loseloc, winloc));
 				Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Loaded map " + s);
 			} catch(Exception e) {
 				failed++;
@@ -86,6 +87,7 @@ public class FilesStorage implements Storage {
 	
 	public boolean saveMap(GameMap map) {
 		this.config.set(map.getName().toLowerCase() + ".gametype", map.getGameType().name());
+		this.config.set(map.getName().toLowerCase() + ".anticamping", map.getAntiCamping());
 		this.config.set(map.getName().toLowerCase() + ".world", map.getSchematicWorld().getName());
 		this.config.set(map.getName().toLowerCase() + ".spawn.world", map.getSpawn().getWorld().getName());
 		this.config.set(map.getName().toLowerCase() + ".spawn.x", map.getSpawn().getX());
@@ -136,6 +138,7 @@ public class FilesStorage implements Storage {
 			World schematicWorld = Bukkit.getWorld(this.config.getString(s + ".world"));
 
 			GameType gametype = GameType.valueOf(this.config.getString(s + ".gametype"));
+			boolean anticamping = this.config.getBoolean(s + ".anticamping");
 				
 			Location spawn = new Location(
 					Bukkit.getWorld(this.config.getString(s + ".spawn.world")),
@@ -169,7 +172,7 @@ public class FilesStorage implements Storage {
 			BlockVector3 min = BlockVector3.at(Integer.parseInt(minpoint[0]), Integer.parseInt(minpoint[1]), Integer.parseInt(minpoint[2]));
 			BlockVector3 max = BlockVector3.at(Integer.parseInt(maxpoint[0]), Integer.parseInt(maxpoint[1]), Integer.parseInt(maxpoint[2]));
 
-			return new GameMap(s, gametype, schematicWorld, min, max, spawn, minY, maxY, loseloc, winloc);
+			return new GameMap(s, gametype, anticamping, schematicWorld, min, max, spawn, minY, maxY, loseloc, winloc);
 		}
 		return null;
 	}

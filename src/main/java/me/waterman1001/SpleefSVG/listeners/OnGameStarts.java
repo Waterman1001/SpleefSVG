@@ -35,7 +35,7 @@ public class OnGameStarts implements Listener {
 		e.getGame().setStartedCountdown(false);
 		e.getGame().setStartedGame(true);
 		ItemStack item = null;
-		
+
 		try {
 			item = new ItemStack(Material.valueOf(Main.getInstance().getConfig().getString("SpleefItem")));
 			ItemMeta itemmeta = item.getItemMeta();
@@ -43,55 +43,56 @@ public class OnGameStarts implements Listener {
 				itemmeta.setDisplayName(ChatColor.GOLD + "" + ChatColor.BOLD + "SvestiSpleef Shovel");
 			}
 			item.setItemMeta(itemmeta);
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "SpleefItem in config is not valid!");
 			return;
 		}
 
-		for(Player pl : e.getGame().getPlayers()) {
-			if(pl == null) continue;
+		for (Player pl : e.getGame().getPlayers()) {
+			if (pl == null) continue;
 			pl.teleport(e.getGame().getMap().getSpawn());
 			pl.getInventory().setItem(0, item);
 			e.getGame().getPlayerToAntiCampingTimer().put(pl.getUniqueId(), Main.getVars().getAntiCampingTime()); // Initialize each player with the maximum anticamping time.
 		}
 
-        GameManager.getInstance().getThreads().put(e.getGame(), Bukkit.getServer().getScheduler().runTaskTimer(Main.getInstance(), new Runnable() {
-			int i = Main.getVars().getGameTime()+1;
+		GameManager.getInstance().getThreads().put(e.getGame(), Bukkit.getServer().getScheduler().runTaskTimer(Main.getInstance(), new Runnable() {
+			int i = Main.getVars().getGameTime() + 1;
 
-            @Override
-            public void run() {
-                i--;
-                if(i < 60 && i%10 == 0 || i <= 5)
-                	e.getGame().getGs().broadcastGameMessage(Messages.getInstance().gameEndsIn(i));
-                if(i <= 1) {
-                	e.getGame().getGs().broadcastGameMessage(Messages.getInstance().endingGame());
-                	e.getGame().getGs().finishGame(true);
-                    return;
-                }
-            }
-        }, 0L, 20L));
-
-		// AntiCamping Timer ticking each second for each player.
-		GameManager.getInstance().getAntiCampingTimers().put(e.getGame(), Bukkit.getServer().getScheduler().runTaskTimer(Main.getInstance(), new Runnable() {
 			@Override
 			public void run() {
-				for(Player pl : e.getGame().getPlayers()) {
-					if(pl == null) continue;
-					int currentTime = e.getGame().getPlayerToAntiCampingTimer().get(pl.getUniqueId());
-					int newTime = currentTime - 1;
-					e.getGame().getPlayerToAntiCampingTimer().put(pl.getUniqueId(), newTime); // Subtract 1 from all players anticamping timers.
-
-					if(newTime <= 5 && newTime > 0) {
-						pl.sendMessage(Messages.prefix + ChatColor.RED + "AntiCamping: " + ChatColor.YELLOW + "Destroy a block within " + ChatColor.AQUA + newTime + ChatColor.YELLOW + " seconds!");
-					} else if(newTime == 0) {
-						Location newLocation = getNextHighestBlockLoc(pl.getLocation());
-						SpleefPlayerUtils.teleport(pl, newLocation);
-						pl.sendMessage(Messages.prefix + ChatColor.RED + "AntiCamping: " + ChatColor.YELLOW + "You have been teleported down one layer!");
-						e.getGame().getPlayerToAntiCampingTimer().put(pl.getUniqueId(), Main.getVars().getAntiCampingTime()); // Give all anticamping time back again as the player was now teleported down.
-					}
+				i--;
+				if (i < 60 && i % 10 == 0 || i <= 5)
+					e.getGame().getGs().broadcastGameMessage(Messages.getInstance().gameEndsIn(i));
+				if (i <= 1) {
+					e.getGame().getGs().broadcastGameMessage(Messages.getInstance().endingGame());
+					e.getGame().getGs().finishGame(true);
+					return;
 				}
 			}
 		}, 0L, 20L));
+
+		if (e.getGame().getMap().getAntiCamping()) { // Only if anticamping is enabled for this map we let the countdown clock run. Each player does get anticamping time in the hashmap, but it is simply never counted down.
+			// AntiCamping Timer ticking each second for each player.
+			GameManager.getInstance().getAntiCampingTimers().put(e.getGame(), Bukkit.getServer().getScheduler().runTaskTimer(Main.getInstance(), new Runnable() {
+				@Override
+				public void run() {
+					for (Player pl : e.getGame().getPlayers()) {
+						if (pl == null) continue;
+						int currentTime = e.getGame().getPlayerToAntiCampingTimer().get(pl.getUniqueId());
+						int newTime = currentTime - 1;
+						e.getGame().getPlayerToAntiCampingTimer().put(pl.getUniqueId(), newTime); // Subtract 1 from all players anticamping timers.
+
+						if (newTime <= 5 && newTime > 0) {
+							pl.sendMessage(Messages.prefix + ChatColor.RED + "AntiCamping: " + ChatColor.YELLOW + "Destroy a block within " + ChatColor.AQUA + newTime + ChatColor.YELLOW + " seconds!");
+						} else if (newTime == 0) {
+							Location newLocation = getNextHighestBlockLoc(pl.getLocation());
+							SpleefPlayerUtils.teleport(pl, newLocation);
+							pl.sendMessage(Messages.prefix + ChatColor.RED + "AntiCamping: " + ChatColor.YELLOW + "You have been teleported down one layer!");
+							e.getGame().getPlayerToAntiCampingTimer().put(pl.getUniqueId(), Main.getVars().getAntiCampingTime()); // Give all anticamping time back again as the player was now teleported down.
+						}
+					}
+				}
+			}, 0L, 20L));
+		}
 	}
 }

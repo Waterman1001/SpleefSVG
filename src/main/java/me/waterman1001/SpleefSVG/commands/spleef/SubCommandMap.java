@@ -126,7 +126,35 @@ public class SubCommandMap extends BukkitSubCommand {
 			p.sendMessage(GameManager.getInstance().setWinLoc(p, args[1]));
 			return;
 		} else if(action.equalsIgnoreCase("togglegametype") || action.equalsIgnoreCase("gametype")) {
-			if(!p.hasPermission("spleefsvg.command.map.togglegametype")) {
+			if (!p.hasPermission("spleefsvg.command.map.togglegametype")) {
+				p.sendMessage(Messages.noPermissions);
+				return;
+			}
+
+			if (args.length == 1) {
+				p.sendMessage(getInfo());
+				return;
+			}
+
+			GameMap currentMap = null;
+			for (GameMap map : GameManager.getInstance().getMaps()) {
+				if (map.getName().equalsIgnoreCase(args[1]))
+					currentMap = map;
+			}
+
+			if (currentMap == null) {
+				p.sendMessage(Messages.getInstance().couldntFindMapNamed(args[1]));
+				return;
+			}
+
+			if (currentMap.getGameType() == GameType.SPLEEF) {
+				p.sendMessage(GameManager.getInstance().setGameType(args[1], GameType.SPLEGG));
+			} else if (currentMap.getGameType() == GameType.SPLEGG) {
+				p.sendMessage(GameManager.getInstance().setGameType(args[1], GameType.SPLEEF));
+			}
+			return;
+		} else if(action.equalsIgnoreCase("toggleanticamping") || action.equalsIgnoreCase("anticamping")) {
+			if(!p.hasPermission("spleefsvg.command.map.toggleanticamping")) {
 				p.sendMessage(Messages.noPermissions);
 				return;
 			}
@@ -147,10 +175,10 @@ public class SubCommandMap extends BukkitSubCommand {
 				return;
 			}
 
-			if(currentMap.getGameType() == GameType.SPLEEF) {
-				p.sendMessage(GameManager.getInstance().setGameType(args[1], GameType.SPLEGG));
-			} else if(currentMap.getGameType() == GameType.SPLEGG) {
-				p.sendMessage(GameManager.getInstance().setGameType(args[1], GameType.SPLEEF));
+			if(currentMap.getAntiCamping()) {
+				p.sendMessage(GameManager.getInstance().setAntiCamping(args[1], false));
+			} else {
+				p.sendMessage(GameManager.getInstance().setAntiCamping(args[1], true));
 			}
 			return;
 		} else {

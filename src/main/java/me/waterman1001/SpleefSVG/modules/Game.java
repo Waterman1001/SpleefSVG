@@ -14,7 +14,6 @@ public class Game {
 	private GameMap map;
 	private boolean startedCountdown;
 	private boolean startedGame;
-	
 	private GameSteps gs;
 	
 	public Game(GameMap map) {
