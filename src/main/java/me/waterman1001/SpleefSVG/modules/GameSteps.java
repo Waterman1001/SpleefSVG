@@ -211,6 +211,12 @@ public class GameSteps {
 						if(i != 0) {
 							broadcastGameMessage(Messages.getInstance().gameStartsIn(i));
 						}
+					if(i == 4) {
+						for (Player pl : myGame.getPlayers()) {
+							if (pl == null) continue;
+							pl.teleport(myGame.getMap().getSpawn());
+						}
+					}
                     if(i < 1) {
                     	GameManager.getInstance().getThreads().get(myGame).cancel();
                     	broadcastGameMessage(Messages.getInstance().startingGame());

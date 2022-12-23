@@ -74,7 +74,7 @@ public class OnGameStarts implements Listener {
 
 		for (Player pl : e.getGame().getPlayers()) {
 			if (pl == null) continue;
-			pl.teleport(e.getGame().getMap().getSpawn());
+			// pl.teleport(e.getGame().getMap().getSpawn());
 			pl.getInventory().setItem(0, item);
 			e.getGame().getPlayerToAntiCampingTimer().put(pl.getUniqueId(), Main.getVars().getAntiCampingTime()); // Initialize each player with the maximum anticamping time.
 		}
