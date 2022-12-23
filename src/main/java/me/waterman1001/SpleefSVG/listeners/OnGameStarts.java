@@ -39,7 +39,12 @@ public class OnGameStarts implements Listener {
 		// Players that have a Y level that is 1 higher than other players are NOT considered to be higher (jumping)
 		// Therefore, absolute value to consider jumping players to still be at equal level.
 		ArrayList<Player> lowest_players = new ArrayList<>();
-		lowest_players.add(game.getPlayers()[0]); // Add the first player of the game as initialisation.
+		for(Player p : game.getPlayers()) { // This for-loop is necessary to make sure the first non-null player is added to the first index of the lowest_players array.
+			if (p == null) continue;
+			lowest_players.add(p); // Add the first player of the game as initialisation.
+			break;
+		}
+
 		for (Player pl : game.getPlayers()) {
 			if (pl == null) continue;
 			if (lowest_players.contains(pl)) continue;
