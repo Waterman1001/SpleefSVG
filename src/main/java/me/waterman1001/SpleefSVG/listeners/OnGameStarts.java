@@ -23,10 +23,10 @@ public class OnGameStarts implements Listener {
 
 	// Gets the location of the next highest block underneath the player that is not air.
 	private Location getNextHighestBlockLoc(Location playerLoc) {
-		for (int y = playerLoc.getBlockY() - 3; y > 10; y--) { // Minus 3 to also accomodate for players that jump to circumvent anticamping
+		for (int y = playerLoc.getBlockY() - 3; y > 10; y--) { // Minus 3 to also accomodate for players that jump to circumvent anticamping teleport
 			Block nextHighestBlock = playerLoc.getWorld().getBlockAt(playerLoc.getBlockX(), y, playerLoc.getBlockZ());
 			if (nextHighestBlock.getType() != Material.AIR) {
-				Location layerDownLocation = new Location(playerLoc.getWorld(), playerLoc.getBlockX(), y + 2, playerLoc.getBlockZ());
+				Location layerDownLocation = new Location(playerLoc.getWorld(), playerLoc.getX(), y + 2, playerLoc.getZ());
 				return layerDownLocation;
 			}
 		}
