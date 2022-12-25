@@ -52,8 +52,10 @@ public class Main extends JavaPlugin {
 
 	public void setupManagers() {
 		vars = new GlobalVariables(); // Loading critical variables for the game
-		
-		GameManager.getInstance();
+
+		// Delay creating the GameManager to make sure the worlds are loaded first.
+		// Otherwise we might get a problem with WorldEdit Adapter when loading the maps.
+		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> GameManager.getInstance(), 20);
 		StorageManager.getInstance();
 	}
 	
