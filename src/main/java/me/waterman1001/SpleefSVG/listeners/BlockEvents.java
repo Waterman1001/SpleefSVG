@@ -57,7 +57,7 @@ public class BlockEvents implements Listener {
 						Material clickedBlockType = clickedBlock.getType();
 						if (clickedBlockType == Material.SNOW_BLOCK || clickedBlockType == Material.SNOW
 								|| clickedBlockType == Material.PACKED_ICE || clickedBlockType == Material.CUT_SANDSTONE
-								|| clickedBlockType == Material.BROWN_MUSHROOM_BLOCK || clickedBlockType == Material.SEA_LANTERN
+								|| clickedBlockType == Material.BROWN_MUSHROOM_BLOCK
 								|| clickedBlockType == Material.COAL_BLOCK || clickedBlockType == Material.REDSTONE_BLOCK
 								|| Tag.LOGS.isTagged(clickedBlockType) || Tag.TERRACOTTA.isTagged(clickedBlockType)
 								|| Tag.WOOL.isTagged(clickedBlockType)) {
@@ -111,7 +111,7 @@ public class BlockEvents implements Listener {
 								Material hitBlockType = hitBlock.getType();
 								if (hitBlockType == Material.SNOW_BLOCK || hitBlockType == Material.SNOW
 										|| hitBlockType == Material.PACKED_ICE || hitBlockType == Material.CUT_SANDSTONE
-										|| hitBlockType == Material.BROWN_MUSHROOM_BLOCK || hitBlockType == Material.SEA_LANTERN
+										|| hitBlockType == Material.BROWN_MUSHROOM_BLOCK
 										|| hitBlockType == Material.COAL_BLOCK || hitBlockType == Material.REDSTONE_BLOCK
 										|| Tag.LOGS.isTagged(hitBlockType) || Tag.TERRACOTTA.isTagged(hitBlockType)
 										|| Tag.WOOL.isTagged(hitBlockType)) {

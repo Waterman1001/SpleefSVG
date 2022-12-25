@@ -80,6 +80,7 @@ public class FilesStorage implements Storage {
 			} catch(Exception e) {
 				failed++;
 				Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Failed to load " + failed + " maps!");
+				e.printStackTrace(); // Make sure an error occurs explaining why map loading failed.
 			}
 		}
 		return list;
