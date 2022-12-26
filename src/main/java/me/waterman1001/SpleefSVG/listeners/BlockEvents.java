@@ -19,8 +19,34 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class BlockEvents implements Listener {
-	
+
+	private ArrayList<Material> breakable_blocks = new ArrayList<>(
+			Arrays.asList(
+					Material.SNOW_BLOCK,
+					Material.SNOW,
+					Material.PACKED_ICE,
+					Material.CUT_SANDSTONE,
+					Material.BROWN_MUSHROOM_BLOCK,
+					Material.COAL_BLOCK,
+					Material.REDSTONE_BLOCK,
+					Material.LAPIS_BLOCK,
+					Material.SMOOTH_QUARTZ,
+					Material.CHISELED_QUARTZ_BLOCK,
+					Material.SPONGE,
+					Material.DIAMOND_BLOCK,
+					Material.END_STONE,
+					Material.OBSIDIAN,
+					Material.OCHRE_FROGLIGHT,
+					Material.VERDANT_FROGLIGHT,
+					Material.PEARLESCENT_FROGLIGHT,
+					Material.MOSS_BLOCK,
+					Material.TNT)
+	);
+
 	@EventHandler
 	public void onStartBreaking(PlayerInteractEvent e) {
 		Player p = e.getPlayer();
@@ -55,17 +81,8 @@ public class BlockEvents implements Listener {
 				if(clickedBlock != null) {
 					if(clickedBlock.getY() < game.getMap().getmaxY()) {
 						Material clickedBlockType = clickedBlock.getType();
-						if (clickedBlockType == Material.SNOW_BLOCK || clickedBlockType == Material.SNOW
-								|| clickedBlockType == Material.PACKED_ICE || clickedBlockType == Material.CUT_SANDSTONE
-								|| clickedBlockType == Material.BROWN_MUSHROOM_BLOCK || clickedBlockType == Material.COAL_BLOCK
-								|| clickedBlockType == Material.REDSTONE_BLOCK || clickedBlockType == Material.LAPIS_BLOCK
-								|| clickedBlockType == Material.SMOOTH_QUARTZ || clickedBlockType == Material.CHISELED_QUARTZ_BLOCK
-								|| clickedBlockType == Material.SPONGE || clickedBlockType == Material.DIAMOND_BLOCK
-								|| clickedBlockType == Material.END_STONE || clickedBlockType == Material.OBSIDIAN
-								|| clickedBlockType == Material.OCHRE_FROGLIGHT || clickedBlockType == Material.VERDANT_FROGLIGHT
-								|| clickedBlockType == Material.PEARLESCENT_FROGLIGHT || clickedBlockType == Material.TNT
-								|| clickedBlockType == Material.MOSS_BLOCK || Tag.LOGS.isTagged(clickedBlockType)
-								|| Tag.LEAVES.isTagged(clickedBlockType) || Tag.TERRACOTTA.isTagged(clickedBlockType) 
+						if (breakable_blocks.contains(clickedBlockType) || Tag.LOGS.isTagged(clickedBlockType)
+								|| Tag.LEAVES.isTagged(clickedBlockType) || Tag.TERRACOTTA.isTagged(clickedBlockType)
 								|| Tag.WOOL.isTagged(clickedBlockType) || Tag.PLANKS.isTagged(clickedBlockType)) {
 							e.getClickedBlock().getDrops().clear();
 							event.getBlock().getDrops().clear();
@@ -115,16 +132,7 @@ public class BlockEvents implements Listener {
 						if(hitBlock != null) {
 							if(hitBlock.getY() <= game.getMap().getmaxY()) {
 								Material hitBlockType = hitBlock.getType();
-								if (hitBlockType == Material.SNOW_BLOCK || hitBlockType == Material.SNOW
-										|| hitBlockType == Material.PACKED_ICE || hitBlockType == Material.CUT_SANDSTONE
-										|| hitBlockType == Material.BROWN_MUSHROOM_BLOCK || hitBlockType == Material.COAL_BLOCK
-										|| hitBlockType == Material.REDSTONE_BLOCK || hitBlockType == Material.LAPIS_BLOCK
-										|| hitBlockType == Material.SMOOTH_QUARTZ || hitBlockType == Material.CHISELED_QUARTZ_BLOCK
-										|| hitBlockType == Material.SPONGE || hitBlockType == Material.DIAMOND_BLOCK
-										|| hitBlockType == Material.END_STONE || hitBlockType == Material.OBSIDIAN
-										|| hitBlockType == Material.OCHRE_FROGLIGHT || hitBlockType == Material.VERDANT_FROGLIGHT
-										|| hitBlockType == Material.PEARLESCENT_FROGLIGHT || hitBlockType == Material.TNT
-										|| hitBlockType == Material.MOSS_BLOCK || Tag.LOGS.isTagged(hitBlockType)
+								if (breakable_blocks.contains(hitBlockType) || Tag.LOGS.isTagged(hitBlockType)
 										|| Tag.LEAVES.isTagged(hitBlockType) || Tag.TERRACOTTA.isTagged(hitBlockType) 
 										|| Tag.WOOL.isTagged(hitBlockType) || Tag.PLANKS.isTagged(hitBlockType)) {
 									hitBlock.getDrops().clear();
