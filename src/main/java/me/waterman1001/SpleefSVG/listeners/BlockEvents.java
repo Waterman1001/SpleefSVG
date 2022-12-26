@@ -63,7 +63,8 @@ public class BlockEvents implements Listener {
 								|| clickedBlockType == Material.SPONGE || clickedBlockType == Material.DIAMOND_BLOCK
 								|| clickedBlockType == Material.END_STONE || clickedBlockType == Material.OBSIDIAN
 								|| clickedBlockType == Material.OCHRE_FROGLIGHT || clickedBlockType == Material.VERDANT_FROGLIGHT
-								|| clickedBlockType == Material.PEARLESCENT_FROGLIGHT || Tag.LOGS.isTagged(clickedBlockType)
+								|| clickedBlockType == Material.PEARLESCENT_FROGLIGHT || clickedBlockType == Material.TNT
+								|| clickedBlockType == Material.MOSS_BLOCK || Tag.LOGS.isTagged(clickedBlockType)
 								|| Tag.LEAVES.isTagged(clickedBlockType) || Tag.TERRACOTTA.isTagged(clickedBlockType) 
 								|| Tag.WOOL.isTagged(clickedBlockType) || Tag.PLANKS.isTagged(clickedBlockType)) {
 							e.getClickedBlock().getDrops().clear();
@@ -122,7 +123,8 @@ public class BlockEvents implements Listener {
 										|| hitBlockType == Material.SPONGE || hitBlockType == Material.DIAMOND_BLOCK
 										|| hitBlockType == Material.END_STONE || hitBlockType == Material.OBSIDIAN
 										|| hitBlockType == Material.OCHRE_FROGLIGHT || hitBlockType == Material.VERDANT_FROGLIGHT
-										|| hitBlockType == Material.PEARLESCENT_FROGLIGHT || Tag.LOGS.isTagged(hitBlockType)
+										|| hitBlockType == Material.PEARLESCENT_FROGLIGHT || hitBlockType == Material.TNT
+										|| hitBlockType == Material.MOSS_BLOCK || Tag.LOGS.isTagged(hitBlockType)
 										|| Tag.LEAVES.isTagged(hitBlockType) || Tag.TERRACOTTA.isTagged(hitBlockType) 
 										|| Tag.WOOL.isTagged(hitBlockType) || Tag.PLANKS.isTagged(hitBlockType)) {
 									hitBlock.getDrops().clear();
