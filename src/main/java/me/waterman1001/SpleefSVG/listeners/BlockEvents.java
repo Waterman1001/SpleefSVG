@@ -57,14 +57,15 @@ public class BlockEvents implements Listener {
 						Material clickedBlockType = clickedBlock.getType();
 						if (clickedBlockType == Material.SNOW_BLOCK || clickedBlockType == Material.SNOW
 								|| clickedBlockType == Material.PACKED_ICE || clickedBlockType == Material.CUT_SANDSTONE
-								|| clickedBlockType == Material.BROWN_MUSHROOM_BLOCK
-								|| clickedBlockType == Material.COAL_BLOCK || clickedBlockType == Material.REDSTONE_BLOCK
-								|| clickedBlockType == Material.LAPIS_BLOCK || clickedBlockType == Material.CHISELED_QUARTZ_BLOCK
-								|| clickedBlockType == Material.SPONGE || clickedBlockType == Material.END_STONE
-								|| clickedBlockType == Material.DIAMOND_BLOCK || clickedBlockType == Material.OBSIDIAN
-								|| Tag.PLANKS.isTagged(clickedBlockType) || Tag.LEAVES.isTagged(clickedBlockType)
-								|| Tag.LOGS.isTagged(clickedBlockType) || Tag.TERRACOTTA.isTagged(clickedBlockType)
-								|| Tag.WOOL.isTagged(clickedBlockType)) {
+								|| clickedBlockType == Material.BROWN_MUSHROOM_BLOCK || clickedBlockType == Material.COAL_BLOCK
+								|| clickedBlockType == Material.REDSTONE_BLOCK || clickedBlockType == Material.LAPIS_BLOCK
+								|| clickedBlockType == Material.SMOOTH_QUARTZ || clickedBlockType == Material.CHISELED_QUARTZ_BLOCK
+								|| clickedBlockType == Material.SPONGE || clickedBlockType == Material.DIAMOND_BLOCK
+								|| clickedBlockType == Material.END_STONE || clickedBlockType == Material.OBSIDIAN
+								|| clickedBlockType == Material.OCHRE_FROGLIGHT || clickedBlockType == Material.VERDANT_FROGLIGHT
+								|| clickedBlockType == Material.PEARLESCENT_FROGLIGHT || Tag.LOGS.isTagged(clickedBlockType)
+								|| Tag.LEAVES.isTagged(clickedBlockType) || Tag.TERRACOTTA.isTagged(clickedBlockType) 
+								|| Tag.WOOL.isTagged(clickedBlockType) || Tag.PLANKS.isTagged(clickedBlockType)) {
 							e.getClickedBlock().getDrops().clear();
 							event.getBlock().getDrops().clear();
 							e.getClickedBlock().setType(Material.AIR);
@@ -115,13 +116,14 @@ public class BlockEvents implements Listener {
 								Material hitBlockType = hitBlock.getType();
 								if (hitBlockType == Material.SNOW_BLOCK || hitBlockType == Material.SNOW
 										|| hitBlockType == Material.PACKED_ICE || hitBlockType == Material.CUT_SANDSTONE
-										|| hitBlockType == Material.BROWN_MUSHROOM_BLOCK || hitBlockType == Material.GLOWSTONE
-										|| hitBlockType == Material.COAL_BLOCK || hitBlockType == Material.REDSTONE_BLOCK
-										|| hitBlockType == Material.SMOOTH_QUARTZ || hitBlockType == Material.LAPIS_BLOCK
-										|| hitBlockType == Material.CHISELED_QUARTZ_BLOCK || hitBlockType == Material.SPONGE
-										|| hitBlockType == Material.DIAMOND_BLOCK || hitBlockType == Material.END_STONE
-										|| hitBlockType == Material.OBSIDIAN || Tag.LEAVES.isTagged(hitBlockType)
-										|| Tag.LOGS.isTagged(hitBlockType) || Tag.TERRACOTTA.isTagged(hitBlockType)
+										|| hitBlockType == Material.BROWN_MUSHROOM_BLOCK || hitBlockType == Material.COAL_BLOCK
+										|| hitBlockType == Material.REDSTONE_BLOCK || hitBlockType == Material.LAPIS_BLOCK
+										|| hitBlockType == Material.SMOOTH_QUARTZ || hitBlockType == Material.CHISELED_QUARTZ_BLOCK
+										|| hitBlockType == Material.SPONGE || hitBlockType == Material.DIAMOND_BLOCK
+										|| hitBlockType == Material.END_STONE || hitBlockType == Material.OBSIDIAN
+										|| hitBlockType == Material.OCHRE_FROGLIGHT || hitBlockType == Material.VERDANT_FROGLIGHT
+										|| hitBlockType == Material.PEARLESCENT_FROGLIGHT || Tag.LOGS.isTagged(hitBlockType)
+										|| Tag.LEAVES.isTagged(hitBlockType) || Tag.TERRACOTTA.isTagged(hitBlockType) 
 										|| Tag.WOOL.isTagged(hitBlockType) || Tag.PLANKS.isTagged(hitBlockType)) {
 									hitBlock.getDrops().clear();
 									hitBlock.setType(Material.AIR);
