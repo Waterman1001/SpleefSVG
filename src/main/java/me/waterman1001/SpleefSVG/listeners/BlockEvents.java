@@ -83,7 +83,7 @@ public class BlockEvents implements Listener {
 			Bukkit.getPluginManager().callEvent(event);
 
 			if (!event.isCancelled()) {
-				p.launchProjectile(Egg.class, p.getLocation().getDirection().multiply(1));
+				p.launchProjectile(Egg.class, p.getLocation().getDirection().multiply(1.05));
 			}
 		}
 	}
