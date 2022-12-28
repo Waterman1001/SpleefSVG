@@ -54,10 +54,9 @@ public class GameSteps {
 				if(!GameManager.getInstance().getPlayersEXP().containsKey(p.getUniqueId())) {
 					GameManager.getInstance().getPlayersEXP().put(p.getUniqueId(), SpleefPlayerUtils.getTotalExperience(p));
 				}
-				
-				if(!GameManager.getInstance().getPlayersLocation().containsKey(p.getUniqueId())) {
-					GameManager.getInstance().getPlayersLocation().put(p.getUniqueId(), p.getLocation());
-				}
+
+				// Just always update this last location array with the latest player location for leaving matches.
+				GameManager.getInstance().getPlayersLocation().put(p.getUniqueId(), p.getLocation());
 				
 				SpleefPlayerUtils.teleport(p, this.game.getMap().getSpawn());
 				SpleefPlayerUtils.clearInventory(p);

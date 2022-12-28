@@ -24,7 +24,7 @@ import java.util.Arrays;
 
 public class BlockEvents implements Listener {
 
-	private ArrayList<Material> breakable_blocks = new ArrayList<>(
+	private final ArrayList<Material> breakable_blocks = new ArrayList<>(
 			Arrays.asList(
 					Material.SNOW_BLOCK,
 					Material.SNOW,
