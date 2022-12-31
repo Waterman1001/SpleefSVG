@@ -4,6 +4,7 @@ import me.waterman1001.SpleefSVG.Main;
 import me.waterman1001.SpleefSVG.listeners.custom.GameStartEvent;
 import me.waterman1001.SpleefSVG.managers.GameManager;
 import me.waterman1001.SpleefSVG.modules.Game;
+import me.waterman1001.SpleefSVG.modules.GameType;
 import me.waterman1001.SpleefSVG.utils.Messages;
 import me.waterman1001.SpleefSVG.utils.SpleefPlayerUtils;
 import org.bukkit.Bukkit;
@@ -11,6 +12,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -65,22 +67,36 @@ public class OnGameStarts implements Listener {
 		e.getGame().setStartedGame(true);
 		ItemStack item = null;
 
-		try {
-			item = new ItemStack(Material.valueOf(Main.getInstance().getConfig().getString("SpleefItem")));
+		if(e.getGame().getMap().getGameType() == GameType.BOWSPLEEF) {
+			item = new ItemStack(Material.BOW);
 			ItemMeta itemmeta = item.getItemMeta();
 			if (itemmeta != null) {
-				itemmeta.setDisplayName(ChatColor.GOLD + "" + ChatColor.BOLD + "SvestiSpleef Shovel");
+				itemmeta.setDisplayName(ChatColor.GOLD + "" + ChatColor.BOLD + "SvestiSpleef Bow");
+				itemmeta.addEnchant(Enchantment.ARROW_INFINITE, 1, false);
+				itemmeta.setUnbreakable(true);
 			}
 			item.setItemMeta(itemmeta);
-		} catch (Exception ex) {
-			Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "SpleefItem in config is not valid!");
-			return;
+		} else {
+			try {
+				item = new ItemStack(Material.valueOf(Main.getInstance().getConfig().getString("SpleefItem")));
+				ItemMeta itemmeta = item.getItemMeta();
+				if (itemmeta != null) {
+					itemmeta.setDisplayName(ChatColor.GOLD + "" + ChatColor.BOLD + "SvestiSpleef Shovel");
+				}
+				item.setItemMeta(itemmeta);
+			} catch (Exception ex) {
+				Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "SpleefItem in config is not valid!");
+				return;
+			}
 		}
 
 		for (Player pl : e.getGame().getPlayers()) {
 			if (pl == null) continue;
 			// pl.teleport(e.getGame().getMap().getSpawn());
 			pl.getInventory().setItem(0, item);
+			if(e.getGame().getMap().getGameType() == GameType.BOWSPLEEF) {
+				pl.getInventory().setItem(9, new ItemStack(Material.ARROW));
+			}
 			e.getGame().getPlayerToAntiCampingTimer().put(pl.getUniqueId(), Main.getVars().getAntiCampingTime()); // Initialize each player with the maximum anticamping time.
 		}
 

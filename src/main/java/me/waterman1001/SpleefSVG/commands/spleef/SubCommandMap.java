@@ -150,6 +150,8 @@ public class SubCommandMap extends BukkitSubCommand {
 			if (currentMap.getGameType() == GameType.SPLEEF) {
 				p.sendMessage(GameManager.getInstance().setGameType(args[1], GameType.SPLEGG));
 			} else if (currentMap.getGameType() == GameType.SPLEGG) {
+				p.sendMessage(GameManager.getInstance().setGameType(args[1], GameType.BOWSPLEEF));
+			} else if (currentMap.getGameType() == GameType.BOWSPLEEF) {
 				p.sendMessage(GameManager.getInstance().setGameType(args[1], GameType.SPLEEF));
 			}
 			return;

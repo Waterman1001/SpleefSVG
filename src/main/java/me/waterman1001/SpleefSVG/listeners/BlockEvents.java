@@ -12,6 +12,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Egg;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -59,7 +60,9 @@ public class BlockEvents implements Listener {
 		}
 
 		if (p.getInventory().getItemInMainHand().getType() != Material.valueOf(Main.getInstance().getConfig().getString("SpleefItem"))
-				&& p.getInventory().getItemInOffHand().getType() != Material.valueOf(Main.getInstance().getConfig().getString("SpleefItem"))) {
+				&& p.getInventory().getItemInOffHand().getType() != Material.valueOf(Main.getInstance().getConfig().getString("SpleefItem"))
+				&& p.getInventory().getItemInMainHand().getType() != Material.BOW
+				&& p.getInventory().getItemInOffHand().getType() != Material.BOW) {
 			e.setCancelled(true);
 			return;
 		}
@@ -93,14 +96,10 @@ public class BlockEvents implements Listener {
 				}
 				e.setCancelled(true);
 			}
-		} else if(game.getMap().getGameType() == GameType.SPLEGG) {
-			e.setCancelled(true);
-			if (e.getAction() != Action.RIGHT_CLICK_BLOCK && e.getAction() != Action.RIGHT_CLICK_AIR) return;
-
-			PlayerSpleefBlockEvent event = new PlayerSpleefBlockEvent(p, game, e.getClickedBlock());
-			Bukkit.getPluginManager().callEvent(event);
-
-			if (!event.isCancelled()) {
+		} else {
+			if (e.getAction() != Action.RIGHT_CLICK_BLOCK && e.getAction() != Action.RIGHT_CLICK_AIR) {
+				e.setCancelled(true);
+			} else if(game.getMap().getGameType() == GameType.SPLEGG) {
 				p.launchProjectile(Egg.class, p.getLocation().getDirection().multiply(1.05));
 			}
 		}
@@ -119,30 +118,35 @@ public class BlockEvents implements Listener {
 	}
 
 	@EventHandler
-	public void onSpleggEggHit(ProjectileHitEvent e) {
-		if(e.getEntity().getType() == EntityType.EGG) {
-			Egg egg = (Egg) e.getEntity();
-			if(egg.getLocation().getWorld().getName().equalsIgnoreCase("Minigames")) {
-				if (egg.getShooter() instanceof Player p) {
-					Game game = GameManager.getInstance().getPlayerGame(p);
-					if (game == null) return;
+	public void onSpleggEggOrBowHit(ProjectileHitEvent e) {
+		Projectile projectile = e.getEntity();
+		if(!projectile.getLocation().getWorld().getName().equalsIgnoreCase("Minigames")) return;
 
-					if (game.getMap().getGameType() == GameType.SPLEGG) {
-						Block hitBlock = e.getHitBlock();
-						if(hitBlock != null) {
-							if(hitBlock.getY() <= game.getMap().getmaxY()) {
-								Material hitBlockType = hitBlock.getType();
-								if (breakable_blocks.contains(hitBlockType) || Tag.LOGS.isTagged(hitBlockType)
-										|| Tag.LEAVES.isTagged(hitBlockType) || Tag.TERRACOTTA.isTagged(hitBlockType) 
-										|| Tag.WOOL.isTagged(hitBlockType) || Tag.PLANKS.isTagged(hitBlockType)) {
-									hitBlock.getDrops().clear();
-									hitBlock.setType(Material.AIR);
-									game.getPlayerToAntiCampingTimer().put(p.getUniqueId(), Main.getVars().getAntiCampingTime()); // Give all anticamping time back again after a block destroy.
-								}
-							}
+		if (projectile.getShooter() instanceof Player p) {
+			Game game = GameManager.getInstance().getPlayerGame(p);
+			if (game == null) return;
+
+			if ((game.getMap().getGameType() == GameType.SPLEGG && e.getEntity().getType() == EntityType.EGG) ||
+					(game.getMap().getGameType() == GameType.BOWSPLEEF && e.getEntity().getType() == EntityType.ARROW)) {
+
+				PlayerSpleefBlockEvent event = new PlayerSpleefBlockEvent(p, game, e.getHitBlock());
+				Bukkit.getPluginManager().callEvent(event);
+
+				if(!event.isCancelled()) {
+					Block hitBlock = e.getHitBlock();
+					if(hitBlock == null) return;
+					if (hitBlock.getY() <= game.getMap().getmaxY()) {
+						Material hitBlockType = hitBlock.getType();
+						if (breakable_blocks.contains(hitBlockType) || Tag.LOGS.isTagged(hitBlockType)
+								|| Tag.LEAVES.isTagged(hitBlockType) || Tag.TERRACOTTA.isTagged(hitBlockType)
+								|| Tag.WOOL.isTagged(hitBlockType) || Tag.PLANKS.isTagged(hitBlockType)) {
+							hitBlock.getDrops().clear();
+							hitBlock.setType(Material.AIR);
+							e.getEntity().remove();
+							game.getPlayerToAntiCampingTimer().put(p.getUniqueId(), Main.getVars().getAntiCampingTime()); // Give all anticamping time back again after a block destroy.
 						}
-						e.setCancelled(true);
 					}
+					e.setCancelled(true);
 				}
 			}
 		}
