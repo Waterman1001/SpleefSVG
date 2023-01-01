@@ -1,10 +1,6 @@
 package me.waterman1001.SpleefSVG.managers;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 import com.sk89q.worldedit.IncompleteRegionException;
 import com.sk89q.worldedit.LocalSession;
@@ -173,6 +169,7 @@ public class GameManager {
 
 		game.setPlayerToAntiCampingTimer(new HashMap<UUID, Integer>());
 		// When reloading a game, also reset the player to anticamping timer mapping.
+		game.setPlayersWithBowHitCooldown(new ArrayList<UUID>());
 		
 		game.setStartedCountdown(false);
 		game.setStartedGame(false);

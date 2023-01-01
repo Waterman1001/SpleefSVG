@@ -11,6 +11,7 @@ public class Game {
 	private List<Player> spectators;
 	private ArrayList<UUID> playersQuitDuringGame;
 	private HashMap<UUID, Integer> playerToAntiCampingTimer;
+	private ArrayList<UUID> playersWithBowHitCooldown;
 	private GameMap map;
 	private boolean startedCountdown;
 	private boolean startedGame;
@@ -22,6 +23,7 @@ public class Game {
 		this.spectators = new LinkedList<Player>();
 		this.playersQuitDuringGame = new ArrayList<UUID>();
 		this.playerToAntiCampingTimer = new HashMap<UUID, Integer>();
+		this.playersWithBowHitCooldown = new ArrayList<UUID>();
 		this.map = map;
 		
 		this.startedCountdown = false;
@@ -62,6 +64,14 @@ public class Game {
 
 	public void setPlayerToAntiCampingTimer(HashMap<UUID, Integer> playerToAntiCampingTimer) {
 		this.playerToAntiCampingTimer = playerToAntiCampingTimer;
+	}
+
+	public ArrayList<UUID> getPlayersWithBowHitCooldown() {
+		return this.playersWithBowHitCooldown;
+	}
+
+	public void setPlayersWithBowHitCooldown(ArrayList<UUID> playersWithBowHitCooldown) {
+		this.playersWithBowHitCooldown = playersWithBowHitCooldown;
 	}
 
 	public void setMap(GameMap map) {

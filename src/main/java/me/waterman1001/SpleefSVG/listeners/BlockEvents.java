@@ -128,7 +128,7 @@ public class BlockEvents implements Listener {
 					(game.getMap().getGameType() == GameType.BOWSPLEEF && e.getEntity().getType() == EntityType.ARROW)) {
 
                 // Make sure arrows go through falling blocks
-                if(e.getHitEntity() instanceof FallingBlock) {
+                if(e.getHitEntity() instanceof FallingBlock || e.getHitEntity() instanceof Player) {
                     e.setCancelled(true);
                 }
 

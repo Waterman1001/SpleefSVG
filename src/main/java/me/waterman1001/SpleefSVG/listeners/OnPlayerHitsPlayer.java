@@ -1,8 +1,10 @@
 package me.waterman1001.SpleefSVG.listeners;
 
+import me.waterman1001.SpleefSVG.Main;
 import me.waterman1001.SpleefSVG.managers.GameManager;
 import me.waterman1001.SpleefSVG.modules.Game;
 import me.waterman1001.SpleefSVG.modules.GameType;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -24,7 +26,12 @@ public class OnPlayerHitsPlayer implements Listener {
                 if (game.getMap().getGameType() != GameType.BOWSPLEEF) return;
 
                 if (damager.getInventory().getItemInMainHand().getType() == Material.BOW) {
+
+                    if(game.getPlayersWithBowHitCooldown().contains(p.getUniqueId())) return;
+
+                    game.getPlayersWithBowHitCooldown().add(p.getUniqueId());
                     p.setVelocity(new Vector(0, 0.78, 0));
+                    Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> game.getPlayersWithBowHitCooldown().remove(p.getUniqueId()), 3*20);
                 }
             }
         }
