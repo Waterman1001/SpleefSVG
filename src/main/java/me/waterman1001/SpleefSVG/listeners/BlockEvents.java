@@ -9,16 +9,14 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Egg;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Projectile;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -129,6 +127,11 @@ public class BlockEvents implements Listener {
 			if ((game.getMap().getGameType() == GameType.SPLEGG && e.getEntity().getType() == EntityType.EGG) ||
 					(game.getMap().getGameType() == GameType.BOWSPLEEF && e.getEntity().getType() == EntityType.ARROW)) {
 
+                // Make sure arrows go through falling blocks
+                if(e.getHitEntity() instanceof FallingBlock) {
+                    e.setCancelled(true);
+                }
+
 				PlayerSpleefBlockEvent event = new PlayerSpleefBlockEvent(p, game, e.getHitBlock());
 				Bukkit.getPluginManager().callEvent(event);
 
@@ -141,9 +144,19 @@ public class BlockEvents implements Listener {
 								|| Tag.LEAVES.isTagged(hitBlockType) || Tag.TERRACOTTA.isTagged(hitBlockType)
 								|| Tag.WOOL.isTagged(hitBlockType) || Tag.PLANKS.isTagged(hitBlockType)) {
 							hitBlock.getDrops().clear();
-							hitBlock.setType(Material.AIR);
-							e.getEntity().remove();
-							game.getPlayerToAntiCampingTimer().put(p.getUniqueId(), Main.getVars().getAntiCampingTime()); // Give all anticamping time back again after a block destroy.
+							Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), () -> {
+                                // This needs 1 tick otherwise the arrow starts bugging. (For splegg this does not matter)
+                                hitBlock.setType(Material.AIR);
+                                if(game.getMap().getGameType() == GameType.BOWSPLEEF) {
+                                    FallingBlock fallingblock = hitBlock.getWorld().spawnFallingBlock(hitBlock.getLocation().add(0.5, 0.6, 0.5), hitBlockType.createBlockData());
+                                    // Remove the falling block after 8 ticks.
+                                    Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), fallingblock::remove, 8);
+                                }
+                            }, 1);
+							// Remove the arrow after 0.5 seconds. (For splegg this does not matter)
+							Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), projectile::remove, 10);
+							// Give all anticamping time back again after a block destroy.
+							game.getPlayerToAntiCampingTimer().put(p.getUniqueId(), Main.getVars().getAntiCampingTime());
 						}
 					}
 					e.setCancelled(true);
