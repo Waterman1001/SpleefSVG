@@ -3,7 +3,7 @@ main: me.waterman1001.SpleefSVG.Main
 description: A simple SvestiGames Spleef plugin
 author: Waterman1001
 version: 1.0.0
-api-version: 1.19
+api-version: 1.20
 depend:
 - WorldEdit
 
